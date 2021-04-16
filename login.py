@@ -2,7 +2,7 @@ from tkinter import *
 
 r = Tk(className="Cricket Tournament Management System")
 r.geometry("1530x790")
-img = PhotoImage(file='C:\\Users\\aditya m\\Downloads\\CTDMS7.png')
+img = PhotoImage(file='resources\login.png')
 loginPg = Label(r, image=img)
 loginPg.pack()
 
