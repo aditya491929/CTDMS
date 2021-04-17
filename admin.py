@@ -3,7 +3,7 @@ from tkinter import ttk
 
 r = Tk(className=" CTDMS Admin View")
 r.geometry("1530x790")
-img = PhotoImage(file='resources\\adminView.png')
+img = PhotoImage(file='resources\\admin.png')
 adminViewPg = Label(r, image=img)
 adminViewPg.pack()
 
@@ -50,13 +50,17 @@ newTournamentBtn = Button(width=17, background='#caf6ff', relief='flat', text='C
                           font=('Yu Gothic', 14, 'bold'), wraplength=150)
 newTournamentBtn.place(x=1250, y=295)
 
-label1 = LabelFrame(text="Enter Tournament Id", background="white")
-label1.place(x=1220, y=480, width=220, height=60)
-idEntry = Entry(label1, background="#efefef", font=('Yu Gothic', 14, 'bold'))
+label1 = LabelFrame(text="Enter Tournament Id", background="#caf6ff")
+label1.place(x=1228, y=430, width=220, height=60)
+idEntry = Entry(label1, font=('Yu Gothic', 14, 'bold'))
 idEntry.place(x=10, y=0, width=200, height=40)
-viewTournamentBtn = Button(width=18, background='#caf6ff', relief='flat', text='View Tournament Matches',
+viewTournamentBtn = Button(width=18, background='#caf6ff', relief='groove', text='View Tournament Matches',
                            font=('Yu Gothic', 14, 'bold'), wraplength=200)
-viewTournamentBtn.place(x=1225, y=565)
+viewTournamentBtn.place(x=1225, y=505)
+
+adminLogoutBtn = Button(width=18, background='#ff5757', relief='flat', text='Logout',
+                           font=('Yu Gothic', 14, 'bold'))
+adminLogoutBtn.place(x=1225, y=655)
 
 tournaments.insert(parent='', index='end', iid=0, values=("1", "IPL", "BCCI", "2021", "50", "100000", "MI"))
 
