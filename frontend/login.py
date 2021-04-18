@@ -1,8 +1,14 @@
-from tkinter import *
+from tkinter import Tk,PhotoImage,Entry,Button,Label
 
+<<<<<<< HEAD:frontend/login.py
 r = Tk(className=" Cricket Tournament Management System")
 r.geometry("1530x790")
 img = PhotoImage(file='resources\login.png')
+=======
+r = Tk(className="Cricket Tournament Management System")
+r.geometry("1520x790")
+img = PhotoImage(file='resources/login.png')
+>>>>>>> 6c2d6301b4e038fa0792fb1d0d4837704be9e8e2:login.py
 loginPg = Label(r, image=img)
 loginPg.pack()
 
