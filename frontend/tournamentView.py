@@ -54,7 +54,6 @@ matches.heading("result", text="Add Result")
 # matches.insert(parent='', index='end', iid=0, values=("1", "2020/09/2", "14:30:30", "Chinnaswammy stadium", "2", "7",
 #                                                       "edtBtn"))
 
-
 topMargin = 290
 for i in range(5):
     row = Label(width=202, height=3, background="#ededed")

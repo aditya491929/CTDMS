@@ -1,9 +1,18 @@
 from database import Database
+from matchSchedule import matchScheduler
+import random 
 
+    
 
-def validateAdmin(id,password):
-    admin = Database.getData("admin",["admin_id",id])
+def validateAdmin(id_,password):
+    admin = Database.getData("admin",["admin_id",id_])
     if admin[0][1]==password:
+        return True
+    return False
+
+def validateTeam(id_,password):
+    team = Database.getData("team",["team_id",id_])
+    if team[0][1]==password:
         return True
     return False
 
@@ -11,8 +20,41 @@ def getTournaments():
     tournaments = Database.getData(table_name = "tournament")
     return tournaments
 
-def addTournament():
-    pass
+def getTeamNames ():
+    teams = Database.getData(table_name = "teams")
+    return teams[:2]
+
+def getTeamPlayers(team_id):
+    players = Database.getData(table_name="players",filter_by=["team_id",team_id])
+    return players
+  
+
+
+
+
+def addTournament(name,host,year,prize_money,startDate,adminId):
+
+    new_tournamentId = Database.getRowCount("torunament") + 1
+
+    teams = getTeamNames()
+    print("Team Names : ",teams)
+
+    schedule = matchScheduler(teams,startDate)
+    numberOfMatches = len(schedule)
+    print("Number of matches : ",numberOfMatches)
+
+    columns = """
+            INSERT INTO tournament 
+            VALUES (%s,%s,%s,%s,%s,%s,%s,%s)
+            """
+    
+    values = (new_tournamentId,name,host,year,numberOfMatches,prize_money,None,adminId)
+
+
+    Database.insertQuery(columns,values)
+    return True
+
+
 
 def getMatchesForAdmin(tournament_id):
     matches = Database.getData("matches",["tournament_id",tournament_id+""])
@@ -35,7 +77,7 @@ def addMatchResult( m_id,toss_won,
             INSERT INTO match_summary
             VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
             """
-    values = tuple(m_id,toss_won,overs1,runs1,wickets1,extras1,overs2,run2,wickets2,extras2,
+    values = (m_id,toss_won,overs1,runs1,wickets1,extras1,overs2,run2,wickets2,extras2,
                     man_of_the_match,winning_team,losing_team)
 
     Database.insertQuery(query,values)
@@ -60,6 +102,8 @@ def addPlayerToTeam(team_id,first_name,last_name,type_,email):
     values = (p_id,first_name,last_name,email,None)
     Database.insertQuery(query2,values)
     return True
+
+    # def generateMatches()
     
 
 

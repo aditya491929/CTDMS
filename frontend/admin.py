@@ -1,6 +1,14 @@
 from tkinter import *
 from tkinter import ttk
 
+import os
+import sys
+backendModulePath = os.path.dirname(os.path.dirname(__file__))+"/backend"
+print(backendModulePath)
+sys.path.append(backendModulePath)
+
+from connect import validateAdmin
+
 r = Tk(className=" CTDMS Admin View")
 r.geometry("1530x790")
 img = PhotoImage(file='resources\\admin.png')
