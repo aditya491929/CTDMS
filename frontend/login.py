@@ -12,7 +12,7 @@ from connect import validateAdmin
 
 r = Tk(className=" Cricket Tournament Management System")
 r.geometry("1530x790")
-img = PhotoImage(file='resources\\login.png')
+img = PhotoImage(file='resources\login.png')
 loginPg = Label(r, image=img)
 loginPg.pack()
 
