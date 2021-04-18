@@ -1,14 +1,18 @@
 from tkinter import Tk,PhotoImage,Entry,Button,Label
+import os
 
-<<<<<<< HEAD:frontend/login.py
+import sys
+
+backendModulePath = os.path.dirname(os.path.dirname(__file__))+"/backend"
+
+print(backendModulePath)
+
+sys.path.append(backendModulePath)
+from connect import validateAdmin
+
 r = Tk(className=" Cricket Tournament Management System")
 r.geometry("1530x790")
-img = PhotoImage(file='resources\login.png')
-=======
-r = Tk(className="Cricket Tournament Management System")
-r.geometry("1520x790")
-img = PhotoImage(file='resources/login.png')
->>>>>>> 6c2d6301b4e038fa0792fb1d0d4837704be9e8e2:login.py
+img = PhotoImage(file='resources\\login.png')
 loginPg = Label(r, image=img)
 loginPg.pack()
 
@@ -25,6 +29,7 @@ teamPass.place(x=867, y=512)
 loginBtnAdmin = Button(width=15, height=1, background='#caf6ff', relief='flat', text='Login',
                        font=('Yu Gothic', 13, 'bold'))
 loginBtnAdmin.place(x=345, y=590)
+# loginBtnAdmin.config(command=validateAdmin)
 
 loginBtnTeam = Button(width=15, height=1, background='#caf6ff', relief='flat', text='Login',
                       font=('Yu Gothic', 13, 'bold'))

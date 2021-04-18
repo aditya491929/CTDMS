@@ -1,6 +1,5 @@
 from database import Database
 
-
 def validateAdmin(id,password):
     admin = Database.getData("admin",["admin_id",id])
     if admin[0][1]==password:
