@@ -1,4 +1,4 @@
-from tkinter import *
+from tkinter import Tk,PhotoImage,Entry,Button,Label
 
 r = Tk(className=" Cricket Tournament Management System")
 r.geometry("1530x790")
