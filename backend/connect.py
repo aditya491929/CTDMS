@@ -2,9 +2,12 @@ from database import Database
 
 def validateAdmin(id,password):
     admin = Database.getData("admin",["admin_id",id])
+    if len(admin)==0:
+        return 1
     if admin[0][1]==password:
-        return True
-    return False
+        print("AUthenticated")
+        return 2
+    return 0
 
 def getTournaments():
     tournaments = Database.getData(table_name = "tournament")
