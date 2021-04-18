@@ -51,7 +51,7 @@ matches.heading("awayTeam", text="Away Team")
 matches.heading("result", text="Add Result")
 
 container = ttk.Frame(r)
-canvas = Canvas(container, width=1400, height=700, background="black")
+canvas = Canvas(container, width=1400, height=700, background="grey")
 scrollbar = ttk.Scrollbar(container, orient="vertical", command=canvas.yview)
 scrollable_frame = ttk.Frame(canvas)
 
@@ -69,22 +69,22 @@ canvas.configure(yscrollcommand=scrollbar.set, background="grey")
 
 
 for i in range(10):
-    row = Label(scrollable_frame, width=201, height=3, background="#efefef")
+    row = Label(scrollable_frame, width=201, height=3, background="#d9d9d9")
     row.pack(pady=3)
     edtBtn = Button(row, width=10, background='#caf6ff', relief='groove', text='Result', font=('Yu Gothic', 10, 'bold'))
     edtBtn.place(x=1300, y=7)
-    m_id = Label(row, width=7, height=1, background="#ededed", text=i, font=('Yu Gothic', 14, 'bold'))
+    m_id = Label(row, width=7, height=1, background="#d9d9d9", text=i, font=('Yu Gothic', 14, 'bold'))
     m_id.place(x=4, y=5)
-    date_lbl = Label(row, width=9, height=1, background="#ededed", text="2021/09/01", font=('Yu Gothic', 14, 'bold'))
+    date_lbl = Label(row, width=9, height=1, background="#d9d9d9", text="2021/09/01", font=('Yu Gothic', 14, 'bold'))
     date_lbl.place(x=134, y=5)
-    time_lbl = Label(row, width=9, height=1, background="#ededed", text="14:30", font=('Yu Gothic', 14, 'bold'))
+    time_lbl = Label(row, width=9, height=1, background="#d9d9d9", text="14:30", font=('Yu Gothic', 14, 'bold'))
     time_lbl.place(x=270, y=5)
-    venue_lbl = Label(row, width=25, height=1, background="#ededed", text="chinnasyammy stadium",
+    venue_lbl = Label(row, width=25, height=1, background="#d9d9d9", text="chinnasyammy stadium",
                       font=('Yu Gothic', 14, 'bold'))
     venue_lbl.place(x=420, y=5)
-    homeTeam_lbl = Label(row, width=15, height=1, background="#ededed", text="csk", font=('Yu Gothic', 14, 'bold'))
+    homeTeam_lbl = Label(row, width=15, height=1, background="#d9d9d9", text="csk", font=('Yu Gothic', 14, 'bold'))
     homeTeam_lbl.place(x=790, y=5)
-    awayTeam_lbl = Label(row, width=15, height=1, background="#ededed", text="Mi", font=('Yu Gothic', 14, 'bold'))
+    awayTeam_lbl = Label(row, width=15, height=1, background="#d9d9d9", text="Mi", font=('Yu Gothic', 14, 'bold'))
     awayTeam_lbl.place(x=1029, y=5)
 
 

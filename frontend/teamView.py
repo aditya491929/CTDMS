@@ -7,6 +7,10 @@ img = PhotoImage(file='resources\\teamView.png')
 teamViewPg = Label(r, image=img)
 teamViewPg.pack()
 
+msg = "11"
+t_id = Message(r, text=msg, background="#ffbcad", font=('Yu Gothic', 20, 'bold'),foreground="white")
+t_id.place(x=980, y=610, width=22)
+
 style = ttk.Style()
 style.theme_use("vista")
 style.configure("upcomingMatches.Treeview.Heading",
@@ -28,6 +32,8 @@ style.map('Treeview', background=[('selected', '#caf6ff')])
 
 upcomingMatches = ttk.Treeview(r, style="upcomingMatches.Treeview")
 
+
+
 upcomingMatches['columns'] = ("opponent", "date", "time", "venue")
 upcomingMatches['show'] = 'headings'
 upcomingMatches.column("opponent", width=180, anchor='center')
@@ -40,22 +46,43 @@ upcomingMatches.heading("date", text="Date")
 upcomingMatches.heading("time", text="Time")
 upcomingMatches.heading("venue", text="Venue")
 
-marginTop = 300
-for i in range(5):
-    row = Label(width=99, height=3, background="#efefef")
-    row.place(x=48, y=marginTop)
-    radio = Radiobutton(row)
+container = ttk.Frame(r)
+canvas = Canvas(container, width=700, bg="white")
+scrollbar = ttk.Scrollbar(container, orient="vertical", command=canvas.yview)
+scrollable_frame = ttk.Frame(canvas)
+
+scrollable_frame.bind(
+    "<Configure>",
+    lambda e: canvas.configure(
+        scrollregion=canvas.bbox("all"),
+        height=333
+    )
+)
+
+canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
+
+canvas.configure(yscrollcommand=scrollbar.set, background="grey")
+
+
+for i in range(10):
+    row = Label(scrollable_frame,width=99, height=3, background="#d9d9d9")
+    row.pack(pady=3)
+    radio = Radiobutton(row, background="#d9d9d9")
     radio.place(x=15, y=10)
-    opponent = Label(row, width=5, height=1, background="#efefef", text="CSK", font=('Yu Gothic', 14, 'bold'))
+    opponent = Label(row, width=5, height=1, background="#d9d9d9", text="CSK", font=('Yu Gothic', 14, 'bold'))
     opponent.place(x=50, y=6)
-    date = Label(row, width=10, height=1, background="#efefef", text="2020/05/03", font=('Yu Gothic', 14, 'bold'))
+    date = Label(row, width=10, height=1, background="#d9d9d9", text="2020/05/03", font=('Yu Gothic', 14, 'bold'))
     date.place(x=180, y=6)
-    time = Label(row, width=10, height=1, background="#efefef", text="14:30", font=('Yu Gothic', 14, 'bold'))
+    time = Label(row, width=10, height=1, background="#d9d9d9", text="14:30", font=('Yu Gothic', 14, 'bold'))
     time.place(x=320, y=6)
-    venue = Label(row, width=20, height=1, background="#efefef", text="Chinnasyammy stadium",
+    venue = Label(row, width=20, height=1, background="#d9d9d9", text="Chinnasyammy stadium",
                   font=('Yu Gothic', 14, 'bold'))
     venue.place(x=440, y=6)
-    marginTop += 60
+    
+
+container.place(x=46, y=300)
+canvas.pack(side="left", fill="both", expand=True)
+scrollbar.pack(side="right", fill="y")
 
 upcomingMatches.place(x=45, y=250)
 
@@ -90,18 +117,38 @@ player.heading("name", text="Name")
 player.heading("type", text="Player Type")
 player.heading("selected", text="Selected")
 
+container1 = ttk.Frame(r)
+canvas1 = Canvas(container1, width=637, bg="white")
+scrollbar1 = ttk.Scrollbar(container1, orient="vertical", command=canvas1.yview)
+scrollable_frame1 = ttk.Frame(canvas1)
 
-marginTop = 300
-for i in range(5):
-    row1 = Label(width=90, height=3, background="#efefef")
-    row1.place(x=824, y=marginTop)
-    name = Label(row1, width=20, height=1, background="#efefef", text="suryakumar yadav", font=('Yu Gothic', 14, 'bold'))
+scrollable_frame1.bind(
+    "<Configure>",
+    lambda e1: canvas1.configure(
+        scrollregion=canvas1.bbox("all"),
+        height=293
+    )
+)
+
+canvas1.create_window((0, 0), window=scrollable_frame1, anchor="nw")
+
+canvas1.configure(yscrollcommand=scrollbar1.set, background="grey")
+
+for i in range(10):
+    row1 = Label(scrollable_frame1,width=90, height=3, background="#d9d9d9")
+    row1.pack(pady=3)
+    name = Label(row1, width=20, height=1, background="#d9d9d9", text="suryakumar yadav", font=('Yu Gothic', 14, 'bold'))
     name.place(x=10, y=6)
-    type = Label(row1, width=12, height=1, background="#efefef", text="Batsman", font=('Yu Gothic', 14, 'bold'))
+    type = Label(row1, width=12, height=1, background="#d9d9d9", text="Batsman", font=('Yu Gothic', 14, 'bold'))
     type.place(x=320, y=6)
-    selected = Checkbutton(row1)
+    selected = Checkbutton(row1, background="#d9d9d9")
     selected.place(x=550, y=8)
-    marginTop += 60
+
+container1.place(x=824, y=300)
+canvas1.pack(side="left", fill="both", expand=True)
+scrollbar1.pack(side="right", fill="y")
+
+
 
 player.place(x=820, y=250)
 

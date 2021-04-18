@@ -14,17 +14,17 @@ t_id.place(x=860, y=165, width=50)
 style = ttk.Style()
 style.theme_use("vista")
 style.configure("table.Treeview.Heading",
-                background="#d9d9d9",
+                background="#e7e7e5",
                 foreground="black",
                 rowheight=48,
-                fieldbackground="#d9d9d9",
+                fieldbackground="#e7e7e5",
                 font=('Yu Gothic', 20, 'bold')
                 )
 style.configure("table.Treeview",
-                background="#d9d9d9",
+                background="#e7e7e5",
                 foreground="black",
                 rowheight=43,
-                fieldbackground="#d9d9d9",
+                fieldbackground="#e7e7e5",
                 font=('Yu Gothic', 15, 'bold'))
 # style.layout("table.Treeview",[('table.Treeview.treearea', {'sticky': 'nswe'})]) #remove border
 style.map('Treeview', background=[('selected', '#caf6ff')])
