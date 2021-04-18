@@ -14,10 +14,10 @@ t_id.place(x=860, y=165, width=50)
 style = ttk.Style()
 style.theme_use("vista")
 style.configure("table.Treeview.Heading",
-                background="#efefef",
+                background="#d9d9d9",
                 foreground="black",
                 rowheight=48,
-                fieldbackground="#d3d3d3",
+                fieldbackground="#d9d9d9",
                 font=('Yu Gothic', 20, 'bold')
                 )
 style.configure("table.Treeview",
@@ -30,6 +30,10 @@ style.configure("table.Treeview",
 style.map('Treeview', background=[('selected', '#caf6ff')])
 
 table = ttk.Treeview(r, style="table.Treeview")
+
+scrlbar = ttk.Scrollbar(table,orient="vertical", command=table.yview)
+scrlbar.place(x=1255, y=36, height=430)
+table.configure(xscrollcommand=scrlbar.set)
 
 table['columns'] = ("1", "2", "3", "4", "5", '6')
 table['show'] = 'headings'     # to_remove_empty_column
@@ -49,6 +53,20 @@ table.heading("5", text="L")
 table.heading("6", text="Pts")
 
 table.insert(parent='', index='end', iid=0, values=("1", "csk", "14", "12", "2", "100"))
+table.insert(parent='', index='end', iid=1, values=("1", "csk", "14", "12", "2", "100"))
+table.insert(parent='', index='end', iid=2, values=("1", "csk", "14", "12", "2", "100"))
+table.insert(parent='', index='end', iid=3, values=("1", "csk", "14", "12", "2", "100"))
+table.insert(parent='', index='end', iid=4, values=("1", "cskhfd", "14", "12", "2", "100"))
+table.insert(parent='', index='end', iid=5, values=("1", "csk", "14", "12", "2", "100"))
+table.insert(parent='', index='end', iid=6, values=("1", "csk", "14", "12", "2", "100"))
+table.insert(parent='', index='end', iid=7, values=("1", "cskrt", "14", "12", "2", "100"))
+table.insert(parent='', index='end', iid=8, values=("1", "cs5y5k", "14", "12", "2", "100"))
+table.insert(parent='', index='end', iid=9, values=("1", "cskf", "14", "12", "2", "100"))
+table.insert(parent='', index='end', iid=10, values=("1", "csghk", "14", "12", "2", "100"))
+table.insert(parent='', index='end', iid=11, values=("1", "cghdfk", "14", "12", "2", "100"))
+table.insert(parent='', index='end', iid=12, values=("1", "cfg", "14", "12", "2", "100"))
+
+
 
 table.place(x=130, y=220)
 

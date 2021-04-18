@@ -50,15 +50,27 @@ matches.heading("homeTeam", text="Home Team")
 matches.heading("awayTeam", text="Away Team")
 matches.heading("result", text="Add Result")
 
+container = ttk.Frame(r)
+canvas = Canvas(container, width=1400, height=700, background="black")
+scrollbar = ttk.Scrollbar(container, orient="vertical", command=canvas.yview)
+scrollable_frame = ttk.Frame(canvas)
 
-# matches.insert(parent='', index='end', iid=0, values=("1", "2020/09/2", "14:30:30", "Chinnaswammy stadium", "2", "7",
-#                                                       "edtBtn"))
+scrollable_frame.bind(
+    "<Configure>",
+    lambda e: canvas.configure(
+        scrollregion=canvas.bbox("all"),
+        height=375,
+    )
+)
+
+canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
+
+canvas.configure(yscrollcommand=scrollbar.set, background="grey")
 
 
-topMargin = 290
-for i in range(5):
-    row = Label(width=202, height=3, background="#ededed")
-    row.place(x=61, y=topMargin)
+for i in range(10):
+    row = Label(scrollable_frame, width=201, height=3, background="#efefef")
+    row.pack(pady=3)
     edtBtn = Button(row, width=10, background='#caf6ff', relief='groove', text='Result', font=('Yu Gothic', 10, 'bold'))
     edtBtn.place(x=1300, y=7)
     m_id = Label(row, width=7, height=1, background="#ededed", text=i, font=('Yu Gothic', 14, 'bold'))
@@ -74,7 +86,12 @@ for i in range(5):
     homeTeam_lbl.place(x=790, y=5)
     awayTeam_lbl = Label(row, width=15, height=1, background="#ededed", text="Mi", font=('Yu Gothic', 14, 'bold'))
     awayTeam_lbl.place(x=1029, y=5)
-    topMargin += 60
+
+
+container.place(x=61, y=278)
+canvas.pack(side="left", fill="both", expand=True)
+scrollbar.pack(side="right", fill="y")
+
 
 matchbackBtn = Button(width=15, background='#caf6ff', relief='flat', text='Back', font=('Yu Gothic', 18, 'bold'))
 matchbackBtn.place(x=120, y=720)
@@ -84,4 +101,3 @@ ptsTableBtn.place(x=1270, y=720)
 
 matches.place(x=60, y=240)
 r.mainloop()
-
