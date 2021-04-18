@@ -7,6 +7,10 @@ img = PhotoImage(file='resources\\PointsTable.png')
 pointsTablePg = Label(r, image=img)
 pointsTablePg.pack()
 
+msg = "Id"
+t_id = Message(r, text=msg, background="white", font=('Yu Gothic', 15, 'bold'))
+t_id.place(x=860, y=165, width=50)
+
 style = ttk.Style()
 style.theme_use("vista")
 style.configure("table.Treeview.Heading",
@@ -17,10 +21,10 @@ style.configure("table.Treeview.Heading",
                 font=('Yu Gothic', 20, 'bold')
                 )
 style.configure("table.Treeview",
-                background="#d3d3d3",
+                background="#d9d9d9",
                 foreground="black",
                 rowheight=43,
-                fieldbackground="#d3d3d3",
+                fieldbackground="#d9d9d9",
                 font=('Yu Gothic', 15, 'bold'))
 # style.layout("table.Treeview",[('table.Treeview.treearea', {'sticky': 'nswe'})]) #remove border
 style.map('Treeview', background=[('selected', '#caf6ff')])
@@ -49,6 +53,6 @@ table.insert(parent='', index='end', iid=0, values=("1", "csk", "14", "12", "2",
 table.place(x=130, y=220)
 
 backBtn = Button(width=10, background='#caf6ff', relief='flat', text='Back', font=('Yu Gothic', 18, 'bold'))
-backBtn.place(x=1310, y=723)
+backBtn.place(x=1310, y=727)
 
 r.mainloop()

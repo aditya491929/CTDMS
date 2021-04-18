@@ -1,6 +1,6 @@
 from tkinter import *
 
-r = Tk(className="Cricket Tournament Management System")
+r = Tk(className=" Cricket Tournament Management System")
 r.geometry("1530x790")
 img = PhotoImage(file='resources\login.png')
 loginPg = Label(r, image=img)

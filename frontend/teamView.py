@@ -109,9 +109,13 @@ squadSaveBtn = Button(width=12, background='#ffbcad', relief='flat', text='Save'
                      foreground="white")
 squadSaveBtn.place(x=1267, y=612)
 
-teamBackBtn = Button(width=15, background='#f4a290', relief='flat', text='Back', font=('Yu Gothic', 18, 'bold'),
+teamLogoutBtn = Button(width=15, background='#f4a290', relief='flat', text='Logout', font=('Yu Gothic', 18, 'bold'),
                      foreground="white")
-teamBackBtn.place(x=100, y=722)
+teamLogoutBtn.place(x=100, y=722)
+
+addPlayerBtn = Button(width=17, height=1, background='#f4a290', relief='flat', text='Add Player', font=('Yu Gothic', 18, 'bold'),
+                     foreground="white")
+addPlayerBtn.place(x=660, y=722)
 
 ptsTableBtn = Button(width=15, background='#f4a290', relief='flat', text='Points Table', font=('Yu Gothic', 18, 'bold'),
                      foreground="white")
