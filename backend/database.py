@@ -41,6 +41,19 @@ class Database:
         return result
 
     @staticmethod
+    def getColumnsOf(table_name,columns):
+        Database.openConnection()
+        cur = Database.getCursor()
+        column_string = columns.join(",")
+        query = "SELECT {} FROM {}".format(column_string,table_name)
+        print("QUERY : ", query)
+        cur.execute(query)
+        results = cur.fetchall()
+        print("Query returned successfully")
+        return results
+
+
+    @staticmethod
     def runQuery(query):
         Database.openConnection()
         cur = Database.getCursor()
@@ -64,6 +77,30 @@ class Database:
         finally:
             Database.closeConnection()
 
+
+    @staticmethod
+    def insertMultipleRows(table,values):
+        Database.openConnection()
+        cur = Database.getCursor()
+        help_str = "({})".format(','.join("%s" for x in range(len(values[0]))))
+        print(help_str)
+        args_str = ','.join(cur.mogrify(help_str,x).decode('utf-8') for x in values)
+        query = "INSERT INTO "+table+" VALUES "+args_str
+
+        try:
+            cur.execute(query)
+            Database.commitConnection()
+            count = cur.rowcount
+            print("{} records inserted!".format(count))
+            return True
+        except (psycopg2.Error) as e:
+            print(e)
+            return False
+        finally:
+            Database.closeConnection()
+            
+
+
     @staticmethod
     def getRowCount(table_name):
         Database.openConnection()
@@ -78,14 +115,3 @@ class Database:
         finally:
             Database.closeConnection()
     
-    
-
-    
-
-
-
-
-# with open("./resources/teams.json","r") as read_file:
-#     team_data = json.load(read_file)
-
-# print(team_data['2'])
