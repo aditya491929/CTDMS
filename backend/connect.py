@@ -1,6 +1,5 @@
 from database import Database
 from matchSchedule import matchScheduler
-import random 
 
 def validateAdmin(id,password):
     admin = Database.getData("admin",["admin_id",id])
@@ -25,8 +24,14 @@ def getTournaments():
     return tournaments
 
 def getTeamNames ():
-    teams = Database.getData(table_name = "teams")
+    teams = Database.getColumnsOf(table_name = "teams",columns=["team_name"])
     return teams[:2]
+
+def getTeamHomeGrounds():
+    names = getTeamNames()
+    home_grounds = Database.getColumnsOf(table_name = "teams", columns = ["home_grounds"])
+    venues = dict(zip(names,home_grounds))
+    return venues
 
 def getTeamPlayers(team_id):
     players = Database.getData(table_name="players",filter_by=["team_id",team_id])
@@ -35,12 +40,16 @@ def getTeamPlayers(team_id):
 
 def addTournament(name,host,year,prize_money,startDate,adminId):
 
-    new_tournamentId = Database.getRowCount("tournament","tournament_id") + 1
+    new_tournamentId = Database.getRowCount("torunament") + 1
+    new_matchId = Database.getRowCount("matches") + 1
 
     teams = getTeamNames()
-    print("Team Names : ",teams)
+    venues = getTeamHomeGrounds()
 
-    schedule = matchScheduler(teams,startDate)
+    schedule = matchScheduler(new_tournamentId,new_matchId,startDate,"16:00:00.0",venues,teams)
+
+    print("LAST MATCH : ",schedule[-1])
+
     numberOfMatches = len(schedule)
     print("Number of matches : ",numberOfMatches)
 
@@ -50,9 +59,14 @@ def addTournament(name,host,year,prize_money,startDate,adminId):
             """
     
     values = (new_tournamentId,name,host,year,numberOfMatches,prize_money,None,adminId)
+    
+    Database.insertQuery(columns,values)
+    print("Torunament Created!")
 
+    Database.insertMultipleRows("matches",schedule)
+    print("Matches scheduled!")
 
-    return Database.insertQuery(columns,values) 
+    return True
 
 
 
@@ -103,7 +117,6 @@ def addPlayerToTeam(team_id,first_name,last_name,type_,email):
     Database.insertQuery(query2,values)
     return True
 
-    # def generateMatches()
     
 
 
