@@ -1,65 +1,82 @@
-from tkinter import Tk,PhotoImage,Entry,Button,Label,messagebox
+from tkinter import Tk,PhotoImage,Entry,Button,Label,messagebox,Toplevel
 import tkinter as tk
 from initial import initialize
 initialize()
 from connect import validateAdmin,validateTeam
+from admin import adminWindow
 
-r = Tk(className=" Cricket Tournament Management System")
-r.geometry("1530x790")
-adU=tk.StringVar() #these two variables store the input givent via the entry widget
-adP=tk.StringVar()
-
-def authenticate():
-    print(adU.get(),adP.get())
-    check=validateAdmin(adU.get(),adP.get())
-    if check==2:
-        messagebox.showinfo(" Message","Logged In Successfully!")
-    elif check==1:
-        messagebox.showerror(" Alert","No Admin Found!")
-    else:
-        messagebox.showerror(" Alert","Invalid Password")
+def main():
+  r = Tk(className=" Cricket Tournament Management System")
+  app=loginWindow(r)
+  
+class loginWindow:
     
-    adU.set("")
-    adP.set("")
+    def authenticate(self):
+            print(self.adU.get(),self.adP.get())
+            check=validateAdmin(self.adU.get(),self.adP.get())
+            if check==2:
+                messagebox.showinfo(" Message","Logged In Successfully!")
+                self.adU.set("")
+                self.adP.set("")
+                self.r1=Toplevel(self.master)
+                self.app=adminWindow(self.r1)
+            elif check==1:
+                messagebox.showerror(" Alert","No Admin Found!")
+            else:
+                messagebox.showerror(" Alert","Invalid Password")
+            
+            self.adU.set("")
+            self.adP.set("")
 
-def authenticate1():
-    print(adU.get(),adP.get())
-    check=validateTeam(adU.get(),adP.get())
-    if check==2:
-        messagebox.showinfo(" Message","Logged In Successfully!")
-    elif check==1:
-        messagebox.showerror(" Alert","No Such Team Found!")
-    else:
-        messagebox.showerror(" Alert","Invalid Password")
-    
-    adU.set("")
-    adP.set("")
+    def authenticate1(self):
+        print(self.TU.get(),self.TP.get())
+        check=validateTeam(self.TU.get(),self.TP.get())
+        if check==2:
+            messagebox.showinfo(" Message","Logged In Successfully!")
+        elif check==1:
+            messagebox.showerror(" Alert","No Such Team Found!")
+        else:
+            messagebox.showerror(" Alert","Invalid Password")
+        
+        self.TU.set("")
+        self.TP.set("")
 
-img = PhotoImage(file='resources\\login.png')
-loginPg = Label(r, image=img)
-loginPg.pack()
+    def __init__(self,master):
+        self.master=master
+        self.master.geometry("1530x790")
 
-adminUser = Entry(font=('Yu Gothic', 20),textvariable=adU, background='#ebebeb', relief='flat')
-adminUser.place(x=220, y=403)
-adminPass = Entry(font=('Yu Gothic', 20),textvariable=adP, background='#ebebeb', relief='flat', show='*')
-adminPass.place(x=220, y=512)
+        self.img = PhotoImage(file='resources\\login.png')
+        self.loginPg = Label(self.master, image=self.img)
+        self.loginPg.pack()
 
-teamUser = Entry(font=('Yu Gothic', 20),textvariable=adU, background='#ebebeb', relief='flat')
-teamUser.place(x=867, y=403)
-teamPass = Entry(font=('Yu Gothic', 20),textvariable=adP, background='#ebebeb', relief='flat', show='*')
-teamPass.place(x=867, y=512)
+        self.adU=tk.StringVar() #these two variables store the input givent via the entry widget
+        self.adP=tk.StringVar()
 
-loginBtnAdmin = Button(width=15, height=1, background='#caf6ff', relief='flat', text='Login',
-                       font=('Yu Gothic', 13, 'bold'))
-loginBtnAdmin.place(x=345, y=590)
+        self.TU=tk.StringVar() #these two variables store the input givent via the entry widget
+        self.TP=tk.StringVar()
 
-loginBtnTeam = Button(width=15, height=1, background='#caf6ff', relief='flat', text='Login',
-                      font=('Yu Gothic', 13, 'bold'))
-loginBtnTeam.place(x=990, y=590)
+        self.adminUser = Entry(self.master,font=('Yu Gothic', 20),textvariable=self.adU, background='#ebebeb', relief='flat')
+        self.adminUser.place(x=220, y=403)
+        self.adminPass = Entry(self.master,font=('Yu Gothic', 20),textvariable=self.adP, background='#ebebeb', relief='flat', show='*')
+        self.adminPass.place(x=220, y=512)
 
-print(adminUser.get(),adminPass.get())
-# loginBtnAdmin.config(command=validateAdmin(adminUser.get(),adminPass.get()))
-loginBtnAdmin.config(command=authenticate)
-loginBtnTeam.config(command=authenticate1)
-r.mainloop()
+        self.teamUser = Entry(self.master,font=('Yu Gothic', 20),textvariable=self.TU, background='#ebebeb', relief='flat')
+        self.teamUser.place(x=867, y=403)
+        self.teamPass = Entry(self.master,font=('Yu Gothic', 20),textvariable=self.TP, background='#ebebeb', relief='flat', show='*')
+        self.teamPass.place(x=867, y=512)
 
+        self.loginBtnAdmin = Button(self.master,width=15, height=1, background='#caf6ff', relief='flat', text='Login',
+                            font=('Yu Gothic', 13, 'bold'))
+        self.loginBtnAdmin.place(x=345, y=590)
+
+        self.loginBtnTeam = Button(self.master,width=15, height=1, background='#caf6ff', relief='flat', text='Login',
+                            font=('Yu Gothic', 13, 'bold'))
+        self.loginBtnTeam.place(x=990, y=590)
+
+        print(self.adU,self.adP)
+        # loginBtnAdmin.config(command=validateAdmin(adminUser.get(),adminPass.get()))
+        self.loginBtnAdmin.config(command=self.authenticate)
+        self.loginBtnTeam.config(command=self.authenticate1)
+        self.master.mainloop()
+
+main()
