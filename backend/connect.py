@@ -13,9 +13,12 @@ def validateAdmin(id,password):
 
 def validateTeam(id_,password):
     team = Database.getData("team",["team_id",id_])
+    if len(team)==0:
+        return 1
     if team[0][1]==password:
-        return True
-    return False
+        print("AUthenticated")
+        return 2
+    return 0
 
 def getTournaments():
     tournaments = Database.getData(table_name = "tournament")
@@ -29,9 +32,6 @@ def getTeamPlayers(team_id):
     players = Database.getData(table_name="players",filter_by=["team_id",team_id])
     return players
   
-
-
-
 
 def addTournament(name,host,year,prize_money,startDate,adminId):
 
