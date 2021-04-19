@@ -33,9 +33,6 @@ def getTeamPlayers(team_id):
     return players
   
 
-
-
-
 def addTournament(name,host,year,prize_money,startDate,adminId):
 
     new_tournamentId = Database.getRowCount("tournament") + 1
