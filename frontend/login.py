@@ -1,4 +1,4 @@
-from tkinter import Tk,PhotoImage,Entry,Button,Label,messagebox,Toplevel
+from tkinter import StringVar, Tk,PhotoImage,Entry,Button,Label,messagebox,Toplevel
 import tkinter as tk
 from initial import initialize
 initialize()
@@ -9,17 +9,17 @@ def main():
   r = Tk(className=" Cricket Tournament Management System")
   app=loginWindow(r)
   
-class loginWindow:
-    
+class loginWindow:    
     def authenticate(self):
             print(self.adU.get(),self.adP.get())
             check=validateAdmin(self.adU.get(),self.adP.get())
             if check==2:
                 messagebox.showinfo(" Message","Logged In Successfully!")
+                adminuser = self.adU.get()
                 self.adU.set("")
                 self.adP.set("")
                 self.r1=Toplevel(self.master)
-                self.app=adminWindow(self.r1)
+                self.app=adminWindow(self.r1,adminuser)
             elif check==1:
                 messagebox.showerror(" Alert","No Admin Found!")
             else:

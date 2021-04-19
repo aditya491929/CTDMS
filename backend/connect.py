@@ -35,7 +35,7 @@ def getTeamPlayers(team_id):
 
 def addTournament(name,host,year,prize_money,startDate,adminId):
 
-    new_tournamentId = Database.getRowCount("tournament") + 1
+    new_tournamentId = Database.getRowCount("tournament","tournament_id") + 1
 
     teams = getTeamNames()
     print("Team Names : ",teams)
@@ -52,8 +52,7 @@ def addTournament(name,host,year,prize_money,startDate,adminId):
     values = (new_tournamentId,name,host,year,numberOfMatches,prize_money,None,adminId)
 
 
-    Database.insertQuery(columns,values)
-    return True
+    return Database.insertQuery(columns,values) 
 
 
 
@@ -86,7 +85,7 @@ def addMatchResult( m_id,toss_won,
     
 
 def addPlayerToTeam(team_id,first_name,last_name,type_,email):
-    p_id = Database.getRowCount("player") + 1
+    p_id = Database.getRowCount("player","p_id") + 1
     print("ROW COUNT : ",p_id)
     
     query = """

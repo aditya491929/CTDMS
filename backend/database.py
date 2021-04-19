@@ -1,3 +1,4 @@
+from tkinter import Toplevel
 import psycopg2
 
 
@@ -61,15 +62,17 @@ class Database:
             print("{} records inserted!".format(count))
         except (psycopg2.Error) as e:
             print(e)
+            return False
         finally:
             Database.closeConnection()
+            return True
 
     @staticmethod
-    def getRowCount(table_name):
+    def getRowCount(table_name,pk):
         Database.openConnection()
         cur = Database.getCursor()
         try:
-            cur.execute("SELECT MAX(p_id) FROM {}".format(table_name))
+            cur.execute("SELECT MAX({}) FROM {}".format(pk, table_name))
             result = cur.fetchone()
             print("Query returned successfully!")
             return result[0]
