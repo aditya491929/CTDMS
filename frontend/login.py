@@ -2,15 +2,19 @@ from tkinter import Tk,PhotoImage,Entry,Button,Label,messagebox
 import tkinter as tk
 from initial import initialize
 initialize()
-from connect import validateAdmin
+from connect import validateAdmin,validateTeam
 
 r = Tk(className=" Cricket Tournament Management System")
 r.geometry("1530x790")
+
 adU=tk.StringVar()
 adP=tk.StringVar()
+tmU=tk.StringVar()
+tmP=tk.StringVar()
 
-def authenticate():
-    print(adU.get(),adP.get())
+
+def authenticateAdmin():
+    print("Login:{}, Pass:{}".format(adU.get(),adP.get()))
     check=validateAdmin(adU.get(),adP.get())
     if check==2:
         messagebox.showinfo(" Message","Logged In Successfully!")
@@ -22,6 +26,20 @@ def authenticate():
     adU.set("")
     adP.set("")
 
+def authenticateTeam():
+    print("Login:{}, Pass:{}".format(tmU.get(),tmP.get()))
+    check1=validateTeam(tmU.get(),tmP.get())
+    if check1==2:
+        messagebox.showinfo(" Message","Logged In Successfully!")
+    elif check1==1:
+        messagebox.showerror(" Alert","No Team Found!")
+    else:
+        messagebox.showerror(" Alert","Invalid Password")
+    
+    tmU.set("")
+    tmP.set("")
+
+
 img = PhotoImage(file='resources\\login.png')
 loginPg = Label(r, image=img)
 loginPg.pack()
@@ -31,9 +49,9 @@ adminUser.place(x=220, y=403)
 adminPass = Entry(font=('Yu Gothic', 20),textvariable=adP, background='#ebebeb', relief='flat', show='*')
 adminPass.place(x=220, y=512)
 
-teamUser = Entry(font=('Yu Gothic', 20), background='#ebebeb', relief='flat')
+teamUser = Entry(font=('Yu Gothic', 20), textvariable=tmU, background='#ebebeb', relief='flat')
 teamUser.place(x=867, y=403)
-teamPass = Entry(font=('Yu Gothic', 20), background='#ebebeb', relief='flat', show='*')
+teamPass = Entry(font=('Yu Gothic', 20), textvariable=tmP, background='#ebebeb', relief='flat', show='*')
 teamPass.place(x=867, y=512)
 
 loginBtnAdmin = Button(width=15, height=1, background='#caf6ff', relief='flat', text='Login',
@@ -44,7 +62,8 @@ loginBtnTeam = Button(width=15, height=1, background='#caf6ff', relief='flat', t
                       font=('Yu Gothic', 13, 'bold'))
 loginBtnTeam.place(x=990, y=590)
 
-print(adminUser.get(),adminPass.get())
-# loginBtnAdmin.config(command=validateAdmin(adminUser.get(),adminPass.get()))
-loginBtnAdmin.config(command=authenticate)
+
+loginBtnAdmin.config(command=authenticateAdmin)
+loginBtnTeam.config(command=authenticateTeam)
+
 r.mainloop()

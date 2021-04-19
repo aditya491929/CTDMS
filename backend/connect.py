@@ -7,15 +7,18 @@ def validateAdmin(id,password):
     if len(admin)==0:
         return 1
     if admin[0][1]==password:
-        print("AUthenticated")
+        print("Authenticated")
         return 2
     return 0
 
 def validateTeam(id_,password):
     team = Database.getData("team",["team_id",id_])
+    if len(team)==0:
+        return 1
     if team[0][1]==password:
-        return True
-    return False
+        print("Authenticated")
+        return 2
+    return 0
 
 def getTournaments():
     tournaments = Database.getData(table_name = "tournament")
@@ -35,7 +38,7 @@ def getTeamPlayers(team_id):
 
 def addTournament(name,host,year,prize_money,startDate,adminId):
 
-    new_tournamentId = Database.getRowCount("torunament") + 1
+    new_tournamentId = Database.getRowCount("tournament") + 1
 
     teams = getTeamNames()
     print("Team Names : ",teams)
@@ -66,8 +69,8 @@ def getMatchesForTeam(team_id):
     matches = Database.runQuery(query)
     return matches
 
-def getPointsTable(tournamet_id):
-    points_table = Database.getData("points_table",["tournament_id",tournamet_id+""])
+def getPointsTable(tournament_id):
+    points_table = Database.getData("points_table",["tournament_id",tournament_id+""])
     return points_table
 
 def addMatchResult( m_id,toss_won,
