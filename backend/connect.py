@@ -24,24 +24,24 @@ def getTournaments():
     return tournaments
 
 def getTeamNames ():
-    teams = Database.getColumnsOf(table_name = "teams",columns=["team_name"])
+    teams = Database.getColumnsOf(table_name = "team",columns=["team_name"])
     return teams[:2]
 
 def getTeamHomeGrounds():
     names = getTeamNames()
-    home_grounds = Database.getColumnsOf(table_name = "teams", columns = ["home_grounds"])
+    home_grounds = Database.getColumnsOf(table_name = "team", columns = ["home_ground"])
     venues = dict(zip(names,home_grounds))
     return venues
 
 def getTeamPlayers(team_id):
-    players = Database.getData(table_name="players",filter_by=["team_id",team_id])
+    players = Database.getData(table_name="player",filter_by=["team_id",team_id])
     return players
   
 
 def addTournament(name,host,year,prize_money,startDate,adminId):
 
-    new_tournamentId = Database.getRowCount("torunament") + 1
-    new_matchId = Database.getRowCount("matches") + 1
+    new_tournamentId = Database.getRowCount("tournament","tournament_id") + 1
+    new_matchId = Database.getRowCount("matches","m_id") + 1
 
     teams = getTeamNames()
     venues = getTeamHomeGrounds()
@@ -61,7 +61,7 @@ def addTournament(name,host,year,prize_money,startDate,adminId):
     values = (new_tournamentId,name,host,year,numberOfMatches,prize_money,None,adminId)
     
     Database.insertQuery(columns,values)
-    print("Torunament Created!")
+    print("Tournament Created!")
 
     Database.insertMultipleRows("matches",schedule)
     print("Matches scheduled!")

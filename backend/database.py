@@ -8,7 +8,7 @@ class Database:
 
     @staticmethod
     def openConnection():
-        Database.con = psycopg2.connect(database="CTDMS",user="postgres",password="aditya491@",host="127.0.0.1",port="5432")
+        Database.con = psycopg2.connect(database="ostpl",user="postgres",password="aditya491@",host="127.0.0.1",port="5432")
         print("Database connected successfully!")
 
     @staticmethod
@@ -45,7 +45,7 @@ class Database:
     def getColumnsOf(table_name,columns):
         Database.openConnection()
         cur = Database.getCursor()
-        column_string = columns.join(",")
+        column_string = ",".join(columns)
         query = "SELECT {} FROM {}".format(column_string,table_name)
         print("QUERY : ", query)
         cur.execute(query)
