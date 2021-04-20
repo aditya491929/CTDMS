@@ -5,7 +5,7 @@ import datetime
 def matchScheduler(tournament_id,startMatchId,startDate,time,venues,teams):
 
     print("Teams : ",teams)
-    print("Venues : ",venues.values)
+    print("Venues : ",venues)
 
     startDate = datetime.datetime.strptime(startDate,"%d-%m-%Y")    
     # print(startDate)
@@ -45,8 +45,9 @@ def matchScheduler(tournament_id,startMatchId,startDate,time,venues,teams):
         leg = schedule[i]
         for l in leg:
             print(l)
+            tt.append(l)
 
-    return tuple(tt)
+    return tt
 
 
 # teams = ["Mi","Rcb","Csk","Rr","Kkr","Srh","Pkbs","Dc"]

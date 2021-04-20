@@ -73,6 +73,7 @@ class Database:
             Database.commitConnection()
             count = cur.rowcount
             print("{} records inserted!".format(count))
+            return True
         except (psycopg2.Error) as e:
             print(e)
             return False
@@ -109,7 +110,7 @@ class Database:
         Database.openConnection()
         cur = Database.getCursor()
         try:
-            cur.execute("SELECT MAX({}) FROM {}".format(pk, table_name))
+            cur.execute("SELECT MAX({}) FROM {}".format(pk,table_name))
             result = cur.fetchone()
             print("Query returned successfully!")
             return result[0]
