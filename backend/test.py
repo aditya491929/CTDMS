@@ -1,4 +1,4 @@
-from connect import getTournaments,addPlayerToTeam,validateAdmin,addTournament,getTeamPlayers,getTeamNames,getTeamHomeGrounds,teamIDs
+from connect import getTournaments,addPlayerToTeam,validateAdmin,addTournament,getTeamPlayers,getTeamNames,getTeamHomeGrounds,teamIDs,matchResult,getPointsTable,getPlayerId,playersInMatch
 # from database import Database
 
 # print("Validate Admin : ",validateAdmin(1,"admin1"))
@@ -24,3 +24,10 @@ from connect import getTournaments,addPlayerToTeam,validateAdmin,addTournament,g
 # print(teamIDs())
 
 # print("T_id 1 players : ", getTeamPlayers(1))
+
+# print("Match Results for Team ID 6 : ", matchResult(6))
+
+
+# print("Player ID of Virat : ", getPlayerId("Virat Kohli"))
+
+# print("Player who played match 1 : ", playersInMatch(1))
