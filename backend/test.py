@@ -31,3 +31,5 @@ from connect import getTournaments,addPlayerToTeam,validateAdmin,addTournament,g
 # print("Player ID of Virat : ", getPlayerId("Virat Kohli"))
 
 # print("Player who played match 1 : ", playersInMatch(1))
+
+# print(getPointsTable(1))

@@ -5,6 +5,7 @@ initialize()
 from connect import *
 from points import PointsTable
 from addPlayer import AddPlayer
+from viewResult import ViewResult
 
 
 # def main5():
@@ -12,9 +13,13 @@ from addPlayer import AddPlayer
 #   app=TeamView(r)
 
 class TeamView:
+    def viewResults(self):
+        self.r6=Toplevel(self.master)
+        self.app6=ViewResult(self.r6,self.team_Id)
+
     def addPlayer(self):
         self.r5=Toplevel(self.master)
-        self.app5=AddPlayer(self.r5)
+        self.app5=AddPlayer(self.r5, self.team_Id)
 
     def ptsTable(self):
         self.r4=Toplevel(self.master)
@@ -86,7 +91,7 @@ class TeamView:
 
         self.canvas2.configure(yscrollcommand=self.scrollbar.set, background="grey")
 
-        self.teamMatches = getMatchesForTeam(self.team_Id)
+        self.teamMatches = getMatchesForTeam(int(self.team_Id))
 
         for i in range(len(self.teamMatches)):
             row = Label(self.scrollable_frame,width=99, height=3, background="#d9d9d9")
@@ -188,7 +193,7 @@ class TeamView:
         self.teamLogoutBtn.place(x=100, y=722)
 
         self.matchResultBtn = Button(self.master,width=17, height=1, background='#f4a290', relief='flat', text='Match Result', font=('Yu Gothic', 18, 'bold'),
-                            foreground="white")
+                            foreground="white", command=self.viewResults)
         self.matchResultBtn.place(x=460, y=722)
 
         self.addPlayerBtn = Button(self.master,width=17, height=1, background='#f4a290', relief='flat', text='Add Player', font=('Yu Gothic', 18, 'bold'),

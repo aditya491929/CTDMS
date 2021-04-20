@@ -66,7 +66,6 @@ class PointsTable:
       self.table.heading("6", text="Pts")
 
       self.ptsTable = getPointsTable(str(tour_id))
-      self.sortedpts = self.ptsTable.sort(key= lambda x: x[5])
       for i in range(len(self.ptsTable)):
         self.table.insert(parent='', index='end', iid=i, values=(i+1, self.ptsTable[i][1], self.ptsTable[i][2], self.ptsTable[i][3], 
                                                                  self.ptsTable[i][4], self.ptsTable[i][5]))

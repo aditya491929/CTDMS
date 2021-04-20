@@ -1,4 +1,4 @@
-from tkinter import StringVar, Tk,PhotoImage,Entry,Button,Label,messagebox,Toplevel
+from tkinter import Tk,PhotoImage,Entry,Button,Label,messagebox,Toplevel
 import tkinter as tk
 from initial import initialize
 initialize()

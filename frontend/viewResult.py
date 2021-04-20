@@ -5,6 +5,7 @@ initialize()
 from connect import *
 
 
+
 # def main7():
 #   r = Tk(className=" CTDMS View Result")
 #   app=ViewResult(r)
@@ -14,12 +15,14 @@ class ViewResult:
     def back(self):
       self.master.destroy()
 
-    def __init__(self,master):
+    def __init__(self,master,team_id):
       self.master=master
       self.master.geometry("1530x790")
       self.img = PhotoImage(file='resources\\resultView.png')
       self.matchResultPg = Label(self.master, image=self.img)
       self.matchResultPg.pack()
+
+      self.t_id = team_id
 
       self.style = ttk.Style()
       self.style.theme_use("vista")
@@ -67,8 +70,9 @@ class ViewResult:
 
       self.result.place(x=42,y=185) 
 
-
-      self.result.insert(parent='', index='end', iid=0, values=(1,1,1,1,1,1,1,1))
+      self.matchResults = matchResult(self.t_id)
+      for i in self.matchResults:
+        self.result.insert(parent='', index='end', iid=i, values=(i[0] ,i[1], i[2], i[3], i[4], i[5], i[6], i[7]))
 
       self.backBtn = Button(self.master,width=10, background='#f4a290', relief='flat', text='Back',foreground="white", font=('Yu Gothic', 15, 'bold'),
                               command=self.back)

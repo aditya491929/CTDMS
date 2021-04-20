@@ -13,9 +13,9 @@ from matchResult import MatchResult
 #     app = TourView(r)
 
 class TourView:
-    def fillResult(self,match_id):
+    def fillResult(self,details):
         self.r5=Toplevel(self.master)
-        self.app5=MatchResult(self.r5,match_id)
+        self.app5=MatchResult(self.r5,details)
 
     def ptsView(self):
         self.r=Toplevel(self.master)
@@ -105,7 +105,7 @@ class TourView:
                              height=3, background="#d9d9d9")
             self.row.pack(pady=3)
             self.edtBtn = Button(self.row, width=10, background='#caf6ff',
-                                 relief='groove', text='Result', font=('Yu Gothic', 10, 'bold'), command= lambda id=self.matchList[i][1]: self.fillResult(id))
+                                 relief='groove', text='Result', font=('Yu Gothic', 10, 'bold'), command= lambda id=[self.matchList[i][1],self.teamname[int(self.matchList[i][5])],self.teamname[int(self.matchList[i][6])]]: self.fillResult(id))
             self.edtBtn.place(x=1300, y=7)
             self.m_id = Label(self.row, width=7, height=1, background="#d9d9d9",
                               text=self.matchList[i][1], font=('Yu Gothic', 14, 'bold'))

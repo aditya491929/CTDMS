@@ -107,9 +107,9 @@ def getMatchesForTeam(team_id):
     matches = Database.runQuery(query)
     return matches
 
-def getPointsTable(tournamet_id):
+def getPointsTable(tournament_id):
 
-    query = "SELECT * FROM points_table ORDER BY points DESC"
+    query = "SELECT * FROM points_table WHERE tournament_id = {} ORDER BY points DESC".format(tournament_id)
     points_table = Database.runQuery(query)
     # points_table = Database.getData("points_table",["tournament_id",tournamet_id+""])
     return points_table
@@ -119,13 +119,13 @@ def addMatchResult( m_id,toss_won,
                     overs2,run2,wickets2,extras2,
                     man_of_the_match,winning_team,losing_team):
 
-    teamMap = getTeamNameMapping()
+    teamMap = getTeamIDMapping()
     toss_won = teamMap[toss_won]
     winning_team = teamMap[winning_team]
     losing_team = teamMap[losing_team]
     man_of_the_match = getPlayerId(man_of_the_match)
 
-    query = """"
+    query = """
             INSERT INTO match_summary
             VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
             """
@@ -161,7 +161,7 @@ def addPlayerToTeam(team_id,first_name,last_name,type_,email):
              INSERT INTO player_info
              VALUES (%s,%s,%s,%s,%s)
              """
-    values = (p_id,first_name,last_name,email,None)
+    values = (p_id,first_name,last_name,first_name[:2]+"."+last_name+"@gmail.com",None)
     Database.insertQuery(query2,values)
     print("Inserted into PlayerInfo table!")
     return True
@@ -169,7 +169,7 @@ def addPlayerToTeam(team_id,first_name,last_name,type_,email):
     
 def matchResult(team_id):
     idToName = getTeamNameMapping()
-    query = "SELECT * FROM match_summary_view WHERE home_team = '{}' OR away_team = '{}'".format(idToName[team_id],idToName[team_id])
+    query = "SELECT * FROM match_summary_view WHERE home_team = '{}' OR away_team = '{}'".format(idToName[int(team_id)],idToName[int(team_id)])
     result = Database.runQuery(query)
     # result = Database.getData("match_summary_view")
     nameToId = getTeamIDMapping()
