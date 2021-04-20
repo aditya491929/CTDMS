@@ -50,9 +50,6 @@ class AddPlayer:
                                 foreground="white", command=self.back)
         self.playerInfoBackBtn.place(x=100, y=722)
 
-        self.ptsTableBtn = Button(self.master,width=15, background='#f4a290', relief='flat', text='Points Table', font=('Yu Gothic', 18, 'bold'),
-                            foreground="white")
-        self.ptsTableBtn.place(x=1260, y=722)
         self.master.mainloop()
 
 # main7()

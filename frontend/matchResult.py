@@ -5,9 +5,9 @@ initialize()
 from connect import *
 
 
-def main6():
-  r = Tk(className=" CTDMS Match Result")
-  app=MatchResult(r)
+# def main6():
+#   r = Tk(className=" CTDMS Match Result")
+#   app=MatchResult(r)
 
 class MatchResult:
     def back(self):
@@ -35,14 +35,15 @@ class MatchResult:
         messagebox.showerror("Incomplete Details","All Fields Are Required!")
 
 
-    def __init__(self,master):
+    def __init__(self,master,m_id):
       self.master=master
       self.master.geometry("1530x790")
       self.img = PhotoImage(file='resources\\matchResult.png')
       self.matchResultPg = Label(self.master, image=self.img)
       self.matchResultPg.pack()
 
-      self.matchNo = StringVar()
+      self.matchId = m_id
+
       self.toss = StringVar()
       self.runs1 = StringVar()
       self.overs1 = StringVar()
@@ -56,8 +57,8 @@ class MatchResult:
       self.win = StringVar()
       self.lose = StringVar()
 
-      self.matchNoEntry = Entry(self.master,font=('Yu Gothic', 20), textvariable=self.matchNo, background='#d9d9d9', relief='flat')
-      self.matchNoEntry.place(x=330, y=207, width=200)
+      self.matchNoEntry = Message(self.master,font=('Yu Gothic', 20), text=self.matchId, background='#d9d9d9', relief='flat')
+      self.matchNoEntry.place(x=330, y=203, width=200)
 
       self.tossEntry = Entry(self.master,font=('Yu Gothic', 20), textvariable=self.toss, background='#d9d9d9', relief='flat')
       self.tossEntry.place(x=1106, y=207, width=200)
@@ -87,15 +88,38 @@ class MatchResult:
       self.extras2Entry = Entry(self.master,font=('Yu Gothic', 20), textvariable=self.extras2, background='#d9d9d9', relief='flat')
       self.extras2Entry.place(x=1225, y=513, width=200)
 
+      self.momSelect = ttk.Combobox(self.master,width=20, font=('Yu Gothic', 20), background="#d9d9d9")
+      self.momSelect['values'] = ('Batsman',
+                                'Bowler',
+                                'All Rounder'
+                                )
+      self.momSelect.place(x=270, y=633,width=200)
+      self.momSelect.current()
 
-      self.momEntry = Entry(self.master,font=('Yu Gothic', 20), textvariable=self.mom, background='#d9d9d9', relief='flat')
-      self.momEntry.place(x=270, y=633, width=200)
+      # self.momEntry = Entry(self.master,font=('Yu Gothic', 20), textvariable=self.mom, background='#d9d9d9', relief='flat')
+      # self.momEntry.place(x=270, y=633, width=200)
 
-      self.winEntry = Entry(self.master,font=('Yu Gothic', 20), textvariable=self.win, background='#d9d9d9', relief='flat')
-      self.winEntry.place(x=730, y=633, width=200)
+      self.winSelect = ttk.Combobox(self.master,width=20, font=('Yu Gothic', 20), background="#d9d9d9")
+      self.winSelect['values'] = ('Batsman',
+                                'Bowler',
+                                'All Rounder'
+                                )
+      self.winSelect.place(x=730, y=633,width=200)
+      self.winSelect.current()
 
-      self.loseEntry = Entry(self.master,font=('Yu Gothic', 20), textvariable=self.lose, background='#d9d9d9', relief='flat')
-      self.loseEntry.place(x=1210, y=633, width=200)
+      # self.winEntry = Entry(self.master,font=('Yu Gothic', 20), textvariable=self.win, background='#d9d9d9', relief='flat')
+      # self.winEntry.place(x=730, y=633, width=200)
+
+      self.loseSelect = ttk.Combobox(self.master,width=20, font=('Yu Gothic', 20), background="#d9d9d9")
+      self.loseSelect['values'] = ('Batsman',
+                                'Bowler',
+                                'All Rounder'
+                                )
+      self.loseSelect.place(x=1210, y=633,width=200)
+      self.loseSelect.current()
+
+      # self.loseEntry = Entry(self.master,font=('Yu Gothic', 20), textvariable=self.lose, background='#d9d9d9', relief='flat')
+      # self.loseEntry.place(x=1210, y=633, width=200)
 
       self.saveBtn = Button(self.master,width=10, background='#7ed957', relief='flat', text='Save', font=('Yu Gothic', 18, 'bold'))
       self.saveBtn.place(x=545, y=708)
@@ -105,4 +129,4 @@ class MatchResult:
       self.backBtn.place(x=845, y=708)
       self.master.mainloop()
 
-main6()
+# main6()

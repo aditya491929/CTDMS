@@ -80,6 +80,11 @@ class AdminWindow:
 
         self.tournaments.place(x=55, y=250)
 
+        self.loadTournament = getTournaments()
+        for i in range(len(self.loadTournament)):
+            self.tournaments.insert(parent='', index='end', iid=i, values=(self.loadTournament[i][0], self.loadTournament[i][1], 
+            self.loadTournament[i][2], self.loadTournament[i][3], self.loadTournament[i][4], self.loadTournament[i][5], self.loadTournament[i][6]))
+
         self.newTournamentBtn = Button(self.master,width=17, background='#caf6ff', relief='flat', text='Create New Tournament',
                                 font=('Yu Gothic', 14, 'bold'), wraplength=150, command=self.createTour)
         self.newTournamentBtn.place(x=1250, y=295)
@@ -96,7 +101,6 @@ class AdminWindow:
                                 font=('Yu Gothic', 14, 'bold'),command=self.logout)
         self.adminLogoutBtn.place(x=1225, y=655)
 
-        self.tournaments.insert(parent='', index='end', iid=0, values=("1", "IPL", "BCCI", "2021", "50", "100000", "MI"))
 
         self.master.mainloop()
 

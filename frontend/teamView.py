@@ -35,10 +35,6 @@ class TeamView:
         self.team_Id = teamId
         self.teamname = {1:"MI",2:"CSK",3:"KKR",4:"DC",5:"RR",6:"RCB",7:"PKBS",8:"SRH"}
 
-        self.msg = "11"
-        self.t_id = Message(self.master, text=self.msg, background="#ffbcad", font=('Yu Gothic', 20, 'bold'),foreground="white")
-        self.t_id.place(x=980, y=610, width=22)
-
         self.style = ttk.Style()
         self.style.theme_use("vista")
         self.style.configure("upcomingMatches.Treeview.Heading",
@@ -124,14 +120,14 @@ class TeamView:
         self.style.configure("player.Treeview.Heading",
                         background="#efefef",
                         foreground="black",
-                        rowheight=40,
+                        rowheight=45,
                         fieldbackground="#d3d3d3",
                         font=('Yu Gothic', 20, 'bold')
                         )
         self.style.configure("player.Treeview",
                         background="#d3d3d3",
                         foreground="black",
-                        rowheight=31,
+                        rowheight=35,
                         fieldbackground="#d3d3d3",
                         font=('Yu Gothic', 15, 'bold')
                         )
@@ -140,15 +136,15 @@ class TeamView:
 
         self.player = ttk.Treeview(self.master, style="player.Treeview")
 
-        self.player['columns'] = ("name", "type", "selected")
+        self.player['columns'] = ("name", "type", "Id")
         self.player['show'] = 'headings'
         self.player.column("name", width=280, anchor='center')
         self.player.column("type", width=230, anchor='center')
-        self.player.column("selected", width=130, anchor='center')
+        self.player.column("Id", width=130, anchor='center')
 
         self.player.heading("name", text="Name")
         self.player.heading("type", text="Player Type")
-        self.player.heading("selected", text="Selected")
+        self.player.heading("Id", text="Id")
 
         self.container1 = ttk.Frame(self.master)
         self.canvas1 = Canvas(self.container1, width=637, bg="white")
@@ -159,7 +155,7 @@ class TeamView:
             "<Configure>",
             lambda e1: self.canvas1.configure(
                 scrollregion=self.canvas1.bbox("all"),
-                height=293
+                height=333
             )
         )
 
@@ -174,10 +170,10 @@ class TeamView:
             row1.pack(pady=3)
             name = Label(row1, width=20, height=1, background="#d9d9d9", text=self.teamPlayer[i][1], font=('Yu Gothic', 14, 'bold'))
             name.place(x=10, y=6)
-            type = Label(row1, width=12, height=1, background="#d9d9d9", text=self.teamPlayer[i][2], font=('Yu Gothic', 14, 'bold'))
+            type = Label(row1, width=11, height=1, background="#d9d9d9", text=self.teamPlayer[i][2], font=('Yu Gothic', 14, 'bold'))
             type.place(x=320, y=6)
-            selected = Checkbutton(row1, background="#d9d9d9")
-            selected.place(x=550, y=8)
+            id = Label(row1, width=20, height=1, background="#d9d9d9", text=str(self.teamPlayer[i][0]), font=('Yu Gothic', 14, 'bold'))
+            id.place(x=445, y=6)
 
         self.container1.place(x=824, y=300)
         self.canvas1.pack(side="left", fill="both", expand=True)
@@ -187,17 +183,17 @@ class TeamView:
 
         self.player.place(x=820, y=250)
 
-        self.squadSaveBtn = Button(self.master,width=12, background='#ffbcad', relief='flat', text='Save', font=('Yu Gothic', 16, 'bold'),
-                            foreground="white")
-        self.squadSaveBtn.place(x=1267, y=612)
-
         self.teamLogoutBtn = Button(self.master,width=15, background='#f4a290', relief='flat', text='Logout', font=('Yu Gothic', 18, 'bold'),
                             foreground="white", command=self.logout)
         self.teamLogoutBtn.place(x=100, y=722)
 
+        self.matchResultBtn = Button(self.master,width=17, height=1, background='#f4a290', relief='flat', text='Match Result', font=('Yu Gothic', 18, 'bold'),
+                            foreground="white")
+        self.matchResultBtn.place(x=460, y=722)
+
         self.addPlayerBtn = Button(self.master,width=17, height=1, background='#f4a290', relief='flat', text='Add Player', font=('Yu Gothic', 18, 'bold'),
                             foreground="white", command=self.addPlayer)
-        self.addPlayerBtn.place(x=660, y=722)
+        self.addPlayerBtn.place(x=860, y=722)
 
         self.ptsTableBtn = Button(self.master,width=7, background='#f4a290', relief='flat', text='Points Table', font=('Yu Gothic', 13, 'bold'),
                             foreground="white", command=self.ptsTable,wraplength=100)

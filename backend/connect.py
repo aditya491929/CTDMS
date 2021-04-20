@@ -137,12 +137,3 @@ def addPlayerToTeam(team_id,first_name,last_name,type_,email):
     return True
 
     
-
-
-
-
-    
-
-
-
-

@@ -4,6 +4,8 @@ from initial import initialize
 initialize()
 from connect import getMatchesForAdmin
 from points import PointsTable
+from viewResult import ViewResult
+from matchResult import MatchResult
 
 
 # def maintournamentView():
@@ -11,6 +13,10 @@ from points import PointsTable
 #     app = TourView(r)
 
 class TourView:
+    def fillResult(self,match_id):
+        self.r5=Toplevel(self.master)
+        self.app5=MatchResult(self.r5,match_id)
+
     def ptsView(self):
         self.r=Toplevel(self.master)
         self.app=PointsTable(self.r,self.matchList[0][0])
@@ -99,7 +105,7 @@ class TourView:
                              height=3, background="#d9d9d9")
             self.row.pack(pady=3)
             self.edtBtn = Button(self.row, width=10, background='#caf6ff',
-                                 relief='groove', text='Result', font=('Yu Gothic', 10, 'bold'))
+                                 relief='groove', text='Result', font=('Yu Gothic', 10, 'bold'), command= lambda id=self.matchList[i][1]: self.fillResult(id))
             self.edtBtn.place(x=1300, y=7)
             self.m_id = Label(self.row, width=7, height=1, background="#d9d9d9",
                               text=self.matchList[i][1], font=('Yu Gothic', 14, 'bold'))
