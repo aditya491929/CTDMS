@@ -20,31 +20,51 @@ def getTournaments():
     return tournaments
 
 def getTeamNames ():
-    teams = Database.getColumnsOf(table_name = "teams",columns=["team_name"])
-    return teams[:2]
+    teams = Database.getColumnsOf(table_name = "team",columns=["team_name"])
+    teams = [t[0] for t in teams]
+    return teams
 
 def getTeamHomeGrounds():
-    names = getTeamNames()
-    home_grounds = Database.getColumnsOf(table_name = "teams", columns = ["home_grounds"])
+    names = teamIDs()
+    home_grounds = Database.getColumnsOf(table_name = "team", columns = ["home_ground"])
+    home_grounds = [t[0] for t in home_grounds]    
     venues = dict(zip(names,home_grounds))
     return venues
 
+
+def getTeamIDMapping():
+    result = Database.getColumnsOf(table_name="team", columns = ["team_name","team_id"])
+    mapping = {}
+    for r in result:
+        mapping[r[0]] = r[1]
+    return result
+
+def teamIDs():
+    result = Database.getColumnsOf(table_name="team", columns = ["team_id"])
+    result = [r[0] for r in result]
+    return result
+
+
+
 def getTeamPlayers(team_id):
-    players = Database.getData(table_name="players",filter_by=["team_id",team_id])
-    return players
+
+    query = "SELECT player_info.p_id,first_name,last_name,player_type FROM player_info INNER JOIN  player ON player.p_id = player_info.p_id WHERE player.team_id = {}".format(team_id)
+    result = Database.runQuery(query)
+    result = [(x[0],x[1]+" "+x[2],x[3]) for x in result]
+    return result
   
 
 def addTournament(name,host,year,prize_money,startDate,adminId):
 
-    new_tournamentId = Database.getRowCount("torunament") + 1
-    new_matchId = Database.getRowCount("matches") + 1
+    new_tournamentId = Database.getRowCount("tournament","tournament_id") + 1
+    new_matchId = Database.getRowCount("matches","m_id") + 1
 
-    teams = getTeamNames()
+    teams = teamIDs()
     venues = getTeamHomeGrounds()
 
     schedule = matchScheduler(new_tournamentId,new_matchId,startDate,"16:00:00.0",venues,teams)
 
-    print("LAST MATCH : ",schedule[-1])
+    # print("LAST MATCH : ",schedule[-1])
 
     numberOfMatches = len(schedule)
     print("Number of matches : ",numberOfMatches)
@@ -57,7 +77,7 @@ def addTournament(name,host,year,prize_money,startDate,adminId):
     values = (new_tournamentId,name,host,year,numberOfMatches,prize_money,None,adminId)
     
     Database.insertQuery(columns,values)
-    print("Torunament Created!")
+    print("Tournament Created!")
 
     Database.insertMultipleRows("matches",schedule)
     print("Matches scheduled!")
@@ -95,7 +115,7 @@ def addMatchResult( m_id,toss_won,
     
 
 def addPlayerToTeam(team_id,first_name,last_name,type_,email):
-    p_id = Database.getRowCount("player") + 1
+    p_id = Database.getRowCount("player","p_id") + 1
     print("ROW COUNT : ",p_id)
     
     query = """
