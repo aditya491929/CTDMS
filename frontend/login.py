@@ -3,7 +3,8 @@ import tkinter as tk
 from initial import initialize
 initialize()
 from connect import validateAdmin,validateTeam
-from admin import adminWindow
+from admin import AdminWindow
+from teamView import TeamView
 
 def main():
   r = Tk(className=" Cricket Tournament Management System")
@@ -11,7 +12,7 @@ def main():
   
 class loginWindow:    
     def authenticate(self):
-            print(self.adU.get(),self.adP.get())
+            print("Login:{} ; Pass:{}".format(self.adU.get(),self.adP.get()))
             check=validateAdmin(self.adU.get(),self.adP.get())
             if check==2:
                 messagebox.showinfo(" Message","Logged In Successfully!")
@@ -19,7 +20,7 @@ class loginWindow:
                 self.adU.set("")
                 self.adP.set("")
                 self.r1=Toplevel(self.master)
-                self.app=adminWindow(self.r1,adminuser)
+                self.app=AdminWindow(self.r1,adminuser)
             elif check==1:
                 messagebox.showerror(" Alert","No Admin Found!")
             else:
@@ -29,10 +30,16 @@ class loginWindow:
             self.adP.set("")
 
     def authenticate1(self):
-        print(self.TU.get(),self.TP.get())
+        print("Login:{} ; Pass:{}".format(self.TU.get(),self.TP.get()))
         check=validateTeam(self.TU.get(),self.TP.get())
         if check==2:
             messagebox.showinfo(" Message","Logged In Successfully!")
+            playerUser = self.TU.get()
+            self.TU.set("")
+            self.TP.set("")
+            self.r2=Toplevel(self.master)
+            self.app2=TeamView(self.r2,playerUser)
+
         elif check==1:
             messagebox.showerror(" Alert","No Such Team Found!")
         else:

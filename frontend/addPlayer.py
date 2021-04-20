@@ -5,11 +5,14 @@ initialize()
 from connect import *
 
 
-def main7():
-  r = Tk(className=" CTDMS Add Player")
-  app=AddPlayer(r)
+# def main7():
+#   r = Tk(className=" CTDMS Add Player")
+#   app=AddPlayer(r)
 
 class AddPlayer:
+    def back(self):
+      self.master.destroy()
+
     def __init__(self,master):
         self.master=master
         self.master.geometry("1530x790")
@@ -20,7 +23,7 @@ class AddPlayer:
         self.fNameEntry = Entry(self.master,font=('Yu Gothic', 20), background='#d9d9d9', relief='flat')
         self.fNameEntry.place(x=470, y=318, width=220)
 
-        self.lNameEntry = Entry(font=('Yu Gothic', 20), background='#d9d9d9', relief='flat')
+        self.lNameEntry = Entry(self.master,font=('Yu Gothic', 20), background='#d9d9d9', relief='flat')
         self.lNameEntry.place(x=1050, y=318, width=220)
 
         self.typeSelect = ttk.Combobox(self.master,width=20, font=('Yu Gothic', 15), background="#d9d9d9")
@@ -44,7 +47,7 @@ class AddPlayer:
         self.squadSaveBtn.place(x=707, y=562)
 
         self.playerInfoBackBtn = Button(self.master,width=15, background='#f4a290', relief='flat', text='Back', font=('Yu Gothic', 18, 'bold'),
-                                foreground="white")
+                                foreground="white", command=self.back)
         self.playerInfoBackBtn.place(x=100, y=722)
 
         self.ptsTableBtn = Button(self.master,width=15, background='#f4a290', relief='flat', text='Points Table', font=('Yu Gothic', 18, 'bold'),
@@ -52,4 +55,4 @@ class AddPlayer:
         self.ptsTableBtn.place(x=1260, y=722)
         self.master.mainloop()
 
-main7()
+# main7()

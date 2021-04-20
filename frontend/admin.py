@@ -10,7 +10,7 @@ from createTournament import CreateTournament
 #   r = Tk(className=" CTDMS Admin View")
 #   app=adminWindow(r)
 
-class adminWindow:
+class AdminWindow:
     def createTour(self):
         self.r3 = Toplevel(self.master)
         self.app = CreateTournament(self.r3,self.adminId)

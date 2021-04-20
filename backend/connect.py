@@ -34,8 +34,10 @@ def getTeamHomeGrounds():
     return venues
 
 def getTeamPlayers(team_id):
-    players = Database.getData(table_name="player",filter_by=["team_id",team_id])
-    return players
+    query = "SELECT player_info.p_id,first_name,last_name,player_type FROM player_info INNER JOIN  player ON player.p_id = player_info.p_id WHERE player.team_id = {}".format(team_id)
+    result = Database.runQuery(query)
+    result = [(x[0],x[1]+" "+x[2],x[3]) for x in result]
+    return result
   
 
 def addTournament(name,host,year,prize_money,startDate,adminId):

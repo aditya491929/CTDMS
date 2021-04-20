@@ -3,6 +3,7 @@ from tkinter import ttk
 from initial import initialize
 initialize()
 from connect import getMatchesForAdmin
+from points import PointsTable
 
 
 # def maintournamentView():
@@ -10,6 +11,10 @@ from connect import getMatchesForAdmin
 #     app = TourView(r)
 
 class TourView:
+    def ptsView(self):
+        self.r=Toplevel(self.master)
+        self.app=PointsTable(self.r,self.matchList[0][0])
+
     def back(self):
         self.master.destroy()
 
@@ -19,6 +24,7 @@ class TourView:
         self.img = PhotoImage(file='resources\\tournamentView.png')
         self.matchTablePg = Label(self.master, image=self.img)
         self.matchTablePg.pack()
+        self.teamname = {1:"MI",2:"CSK",3:"KKR",4:"DC",5:"RR",6:"RCB",7:"PKBS",8:"SRH"}
 
         self.style = ttk.Style()
         self.style.theme_use("vista")
@@ -108,10 +114,10 @@ class TourView:
                                    font=('Yu Gothic', 14, 'bold'))
             self.venue_lbl.place(x=420, y=5)
             self.homeTeam_lbl = Label(self.row, width=15, height=1, background="#d9d9d9",
-                                      text=self.matchList[i][5], font=('Yu Gothic', 14, 'bold'))
+                                      text=self.teamname[int(self.matchList[i][5])], font=('Yu Gothic', 14, 'bold'))
             self.homeTeam_lbl.place(x=790, y=5)
             self.awayTeam_lbl = Label(self.row, width=15, height=1, background="#d9d9d9",
-                                      text=self.matchList[i][6], font=('Yu Gothic', 14, 'bold'))
+                                      text=self.teamname[int(self.matchList[i][6])], font=('Yu Gothic', 14, 'bold'))
             self.awayTeam_lbl.place(x=1029, y=5)
 
         self.container.place(x=61, y=278)
@@ -123,7 +129,7 @@ class TourView:
         self.matchbackBtn.place(x=120, y=720)
 
         self.ptsTableBtn = Button(self.master, width=15, background='#caf6ff',
-                                  relief='flat', text='Points Table', font=('Yu Gothic', 18, 'bold'))
+                                  relief='flat', text='Points Table', font=('Yu Gothic', 18, 'bold'), command=self.ptsView)
         self.ptsTableBtn.place(x=1270, y=720)
 
         self.matches.place(x=60, y=240)
