@@ -1,11 +1,11 @@
+from matchResult import MatchResult
+from viewResult import ViewResult
+from points import PointsTable
 from tkinter import *
 from tkinter import ttk
 from initial import initialize
 initialize()
 from connect import getMatchesForAdmin
-from points import PointsTable
-from viewResult import ViewResult
-from matchResult import MatchResult
 
 
 # def maintournamentView():
@@ -13,28 +13,29 @@ from matchResult import MatchResult
 #     app = TourView(r)
 
 class TourView:
-    def fillResult(self,details):
-        self.r5=Toplevel(self.master)
-        self.app5=MatchResult(self.r5,details)
+    def fillResult(self, details):
+        self.r5 = Toplevel(self.master)
+        self.app5 = MatchResult(self.r5, details)
 
     def ptsView(self):
-        self.r=Toplevel(self.master)
-        self.app=PointsTable(self.r,self.matchList[0][0])
+        self.r = Toplevel(self.master)
+        self.app = PointsTable(self.r, self.matchList[0][0])
 
     def back(self):
         self.master.destroy()
 
     def __init__(self, master, matchesList):
         self.master = master
-        self.width=self.master.winfo_screenwidth()
-        self.height=self.master.winfo_screenheight()
-        self.master.geometry("%dx%d+0+0"%(self.width,self.height))
+        self.width = self.master.winfo_screenwidth()
+        self.height = self.master.winfo_screenheight()
+        self.master.geometry("%dx%d+0+0" % (self.width, self.height))
         self.master.state('zoomed')
-        
+
         self.img = PhotoImage(file='resources\\tournamentView.png')
         self.matchTablePg = Label(self.master, image=self.img)
         self.matchTablePg.pack()
-        self.teamname = {1:"MI",2:"CSK",3:"KKR",4:"DC",5:"RR",6:"RCB",7:"PKBS",8:"SRH"}
+        self.teamname = {1: "MI", 2: "CSK", 3: "KKR",
+                         4: "DC", 5: "RR", 6: "RCB", 7: "PKBS", 8: "SRH"}
 
         self.style = ttk.Style()
         self.style.theme_use("vista")
@@ -109,7 +110,7 @@ class TourView:
                              height=3, background="#d9d9d9")
             self.row.pack(pady=3)
             self.edtBtn = Button(self.row, width=10, background='#caf6ff',
-                                 relief='groove', text='Result', font=('Yu Gothic', 10, 'bold'), command= lambda id=[self.matchList[i][1],self.teamname[int(self.matchList[i][5])],self.teamname[int(self.matchList[i][6])]]: self.fillResult(id))
+                                 relief='groove', text='Result', font=('Yu Gothic', 10, 'bold'), command=lambda id=[self.matchList[i][1], self.teamname[int(self.matchList[i][5])], self.teamname[int(self.matchList[i][6])]]: self.fillResult(id))
             self.edtBtn.place(x=1300, y=7)
             self.m_id = Label(self.row, width=7, height=1, background="#d9d9d9",
                               text=self.matchList[i][1], font=('Yu Gothic', 14, 'bold'))
