@@ -50,7 +50,10 @@ class loginWindow:
 
     def __init__(self,master):
         self.master=master
-        self.master.geometry("1530x790")
+        self.width=self.master.winfo_screenwidth()
+        self.height=self.master.winfo_screenheight()
+        self.master.geometry("%dx%d+0+0"%(self.width,self.height))
+        self.master.state('zoomed')
 
         self.img = PhotoImage(file='resources\\login.png')
         self.loginPg = Label(self.master, image=self.img)

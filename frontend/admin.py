@@ -26,9 +26,12 @@ class AdminWindow:
         self.master.destroy()
 
     def __init__(self,master,adminId):
-        print("12345678")
         self.master=master
-        self.master.geometry("1530x790")
+        self.width=self.master.winfo_screenwidth()
+        self.height=self.master.winfo_screenheight()
+        self.master.geometry("%dx%d+0+0"%(self.width,self.height))
+        self.master.state('zoomed')
+
         self.img1 = PhotoImage(file='resources\\admin.png')
         self.adminViewPg = Label(self.master, image=self.img1)
         self.adminViewPg.pack()
