@@ -29,6 +29,7 @@ class AddPlayer:
       self.height=self.master.winfo_screenheight()
       self.master.geometry("%dx%d+0+0"%(self.width,self.height))
       self.master.state('zoomed')
+      
       self.img = PhotoImage(file='resources\\addPlayer.png')
       self.addPlayerPg = Label(self.master, image=self.img)
       self.addPlayerPg.pack()
