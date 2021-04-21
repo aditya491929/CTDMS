@@ -1,11 +1,13 @@
 from viewResult import ViewResult
 from addPlayer import AddPlayer
 from points import PointsTable
-from connect import *
 from tkinter import *
 from tkinter import ttk
 from initial import initialize
 initialize()
+from connect import *
+import sys
+
 
 
 # def main5():
@@ -28,6 +30,7 @@ class TeamView:
         self.app4 = PointsTable(self.r4, int(tour_Id))
 
     def logout(self):
+        sys.exit()
         self.master.destroy()
 
     def __init__(self, master, teamId):

@@ -5,6 +5,7 @@ from tkinter import ttk
 from initial import initialize
 initialize()
 from connect import *
+import sys
 
 # def main1():
 #   r = Tk(className=" CTDMS Admin View")
@@ -24,6 +25,7 @@ class AdminWindow:
         self.app = TourView(self.r2, matchesList)
 
     def logout(self):
+        sys.exit()
         self.master.destroy()
 
     def __init__(self, master, adminId):

@@ -21,6 +21,7 @@ class loginWindow:
             adminuser = self.adU.get()
             self.adU.set("")
             self.adP.set("")
+            self.master.withdraw()
             self.r1 = Toplevel(self.master)
             self.app = AdminWindow(self.r1, adminuser)
         elif check == 1:
@@ -39,6 +40,7 @@ class loginWindow:
             playerUser = self.TU.get()
             self.TU.set("")
             self.TP.set("")
+            self.master.withdraw()
             self.r2 = Toplevel(self.master)
             self.app2 = TeamView(self.r2, playerUser)
         elif check == 1:
