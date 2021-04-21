@@ -30,10 +30,7 @@ class TourView:
         self.height=self.master.winfo_screenheight()
         self.master.geometry("%dx%d+0+0"%(self.width,self.height))
         self.master.state('zoomed')
-<<<<<<< HEAD
-=======
         
->>>>>>> 30d7f637b427821f921263ff54410ad8cc1b4b18
         self.img = PhotoImage(file='resources\\tournamentView.png')
         self.matchTablePg = Label(self.master, image=self.img)
         self.matchTablePg.pack()
@@ -112,7 +109,7 @@ class TourView:
                              height=3, background="#d9d9d9")
             self.row.pack(pady=3)
             self.edtBtn = Button(self.row, width=10, background='#caf6ff',
-                                 relief='groove', text='Result', font=('Yu Gothic', 10, 'bold'), command= lambda id=[self.matchList[i][1],self.teamname[int(self.matchList[i][5])],self.teamname[int(self.matchList[i][6])]]: self.fillResult(id))
+                            relief='groove', text='Result', font=('Yu Gothic', 10, 'bold'), command= lambda id=[self.matchList[i][1],self.teamname[int(self.matchList[i][5])],self.teamname[int(self.matchList[i][6])]]: self.fillResult(id))
             self.edtBtn.place(x=1300, y=7)
             self.m_id = Label(self.row, width=7, height=1, background="#d9d9d9",
                               text=self.matchList[i][1], font=('Yu Gothic', 14, 'bold'))

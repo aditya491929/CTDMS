@@ -26,10 +26,7 @@ class CreateTournament:
         self.height=self.master.winfo_screenheight()
         self.master.geometry("%dx%d+0+0"%(self.width,self.height))
         self.master.state('zoomed')
-<<<<<<< HEAD
-=======
         
->>>>>>> 30d7f637b427821f921263ff54410ad8cc1b4b18
         self.img = PhotoImage(file='resources\\createTournament.png')
         self.createTournamentPg = Label(self.master, image=self.img)
         self.createTournamentPg.pack()
