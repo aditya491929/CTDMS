@@ -8,7 +8,7 @@ class Database:
 
     @staticmethod
     def openConnection():
-        Database.con = psycopg2.connect(database="ostpl",user="postgres",password="aditya491@",host="127.0.0.1",port="5432")
+        Database.con = psycopg2.connect(database="OSTPL",user="postgres",password="1234",host="127.0.0.1",port="5432")
         print("Database connected successfully!")
 
     @staticmethod
