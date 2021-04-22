@@ -6,6 +6,7 @@ from tkinter import ttk
 from initial import initialize
 initialize()
 from connect import getMatchesForAdmin
+from connect import resultAdded
 
 
 # def maintournamentView():
@@ -106,12 +107,17 @@ class TourView:
         self.t_id.place(x=1363, y=182, width=80)
 
         for i in range(len(self.matchList)):
-            self.row = Label(self.scrollable_frame, width=201,
-                             height=3, background="#d9d9d9")
-            self.row.pack(pady=3)
-            self.edtBtn = Button(self.row, width=10, background='#caf6ff',
-                                 relief='groove', text='Result', font=('Yu Gothic', 10, 'bold'), command=lambda id=[self.matchList[i][1], self.teamname[int(self.matchList[i][5])], self.teamname[int(self.matchList[i][6])]]: self.fillResult(id))
-            self.edtBtn.place(x=1300, y=7)
+            self.row = ttk.Label(self.scrollable_frame, width=300,
+                             background="#d9d9d9")
+            self.row.pack(pady=3,ipady=10)
+            if resultAdded(int(self.matchList[i][1])):
+                self.edtBtn = Button(self.row, width=10, background='#caf6ff',state=DISABLED,
+                                    relief='groove', text='Result', font=('Yu Gothic', 10, 'bold'), command=lambda id=[self.matchList[i][1], self.teamname[int(self.matchList[i][5])], self.teamname[int(self.matchList[i][6])]]: self.fillResult(id))
+                self.edtBtn.place(x=1300, y=7)
+            else:
+                self.edtBtn = Button(self.row, width=10, background='#caf6ff',
+                                    relief='groove', text='Result', font=('Yu Gothic', 10, 'bold'), command=lambda id=[self.matchList[i][1], self.teamname[int(self.matchList[i][5])], self.teamname[int(self.matchList[i][6])]]: self.fillResult(id))
+                self.edtBtn.place(x=1300, y=7)
             self.m_id = Label(self.row, width=7, height=1, background="#d9d9d9",
                               text=self.matchList[i][1], font=('Yu Gothic', 14, 'bold'))
             self.m_id.place(x=4, y=5)

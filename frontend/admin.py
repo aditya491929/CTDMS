@@ -7,12 +7,32 @@ initialize()
 from connect import *
 import sys
 
+tournamentsList = []
+
 # def main1():
 #   r = Tk(className=" CTDMS Admin View")
 #   app=adminWindow(r)
 
 
 class AdminWindow:
+    def refresh(self):
+        global tournamentsList
+        self.loadTournament = getTournaments()
+        for i in range(len(self.loadTournament)):
+            if self.loadTournament[i][0] not in tournamentsList:
+                if i%2 == 0:
+                    self.tournaments.insert(parent='', index='end', iid=i, values=(self.loadTournament[i][0], self.loadTournament[i][1],
+                                                                            self.loadTournament[i][2], self.loadTournament[i][3], 
+                                                                            self.loadTournament[i][4], self.loadTournament[i][5],
+                                                                            self.loadTournament[i][6]),tags=('evenrow',))
+                else:
+                    self.tournaments.insert(parent='', index='end', iid=i, values=(self.loadTournament[i][0], self.loadTournament[i][1],
+                                                                            self.loadTournament[i][2], self.loadTournament[i][3], 
+                                                                            self.loadTournament[i][4], self.loadTournament[i][5],
+                                                                            self.loadTournament[i][6]),tags=('oddrow',))
+                tournamentsList.append(int(self.loadTournament[i][0]))
+            print(tournamentsList)
+
     def createTour(self):
         self.r3 = Toplevel(self.master)
         self.app = CreateTournament(self.r3, self.adminId)
@@ -29,6 +49,7 @@ class AdminWindow:
         self.master.destroy()
 
     def __init__(self, master, adminId):
+        global tournamentsList
         self.master = master
         self.width = self.master.winfo_screenwidth()
         self.height = self.master.winfo_screenheight()
@@ -89,7 +110,6 @@ class AdminWindow:
         self.tournaments.tag_configure('evenrow',background='#efefef')
         self.tournaments.tag_configure('oddrow',background='#d9d9d9')
 
-
         self.loadTournament = getTournaments()
         for i in range(len(self.loadTournament)):
             if i%2 == 0:
@@ -102,11 +122,17 @@ class AdminWindow:
                                                                            self.loadTournament[i][2], self.loadTournament[i][3], 
                                                                            self.loadTournament[i][4], self.loadTournament[i][5],
                                                                            self.loadTournament[i][6]),tags=('oddrow',))
+            tournamentsList.append(int(self.loadTournament[i][0]))
+        print(tournamentsList)
         self.tournaments.place(x=55, y=250)
 
-        self.newTournamentBtn = Button(self.master, width=17, background='#caf6ff', relief='flat', text='Create New Tournament',
+        self.refBtn = Button(self.master, width=7, background='#caf6ff', relief='flat', text='Refresh', font=('Yu Gothic', 15, 'bold'),
+                             command=self.refresh)
+        self.refBtn.place(x=950,y=195)
+
+        self.newTournamentBtn = Button(self.master, width=15, background='#caf6ff', relief='flat', text='Create New Tournament',
                                        font=('Yu Gothic', 14, 'bold'), wraplength=150, command=self.createTour)
-        self.newTournamentBtn.place(x=1250, y=295)
+        self.newTournamentBtn.place(x=1260, y=295)
 
         self.label1 = LabelFrame(
             self.master, text="Enter Tournament Id", background="#caf6ff")
@@ -114,6 +140,7 @@ class AdminWindow:
         self.idEntry = Entry(self.label1, font=(
             'Yu Gothic', 14, 'bold'), textvariable=self.tourId)
         self.idEntry.place(x=10, y=0, width=200, height=40)
+
         self.viewTournamentBtn = Button(self.master, width=18, background='#caf6ff', relief='groove', text='View Tournament Matches',
                                         font=('Yu Gothic', 14, 'bold'), wraplength=200, command=self.viewTour)
         self.viewTournamentBtn.place(x=1225, y=505)
@@ -121,7 +148,6 @@ class AdminWindow:
         self.adminLogoutBtn = Button(self.master, width=18, background='#ff5757', relief='flat', text='Logout',
                                      font=('Yu Gothic', 14, 'bold'), command=self.logout)
         self.adminLogoutBtn.place(x=1225, y=655)
-
         self.master.mainloop()
 
 # main1()

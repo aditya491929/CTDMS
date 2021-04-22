@@ -211,3 +211,11 @@ def matchResult(team_id):
         temp.append(r[12])
         refined.append(temp)
     return refined
+
+def resultAdded(match_id):
+    query = "SELECT COUNT(*) FROM match_summary WHERE m_id = {}".format(match_id)
+    result = Database.runQuery(query)
+    print(result[0][0])
+    if(result[0][0]==1):
+        return True
+    return False

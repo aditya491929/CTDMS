@@ -8,13 +8,39 @@ initialize()
 from connect import *
 import sys
 
-
+count = 0
+playerList = []
 
 # def main5():
 #   r = Tk(className=" CCTDMS Team View")
 #   app=TeamView(r)
 
 class TeamView:
+    def refresh(self):
+        global count
+        global playerList
+        print(count,len(self.teamPlayer))
+        self.teamPlayer = getTeamPlayers(self.team_Id)
+        print(count,len(self.teamPlayer))
+        for i in range(len(self.teamPlayer)):
+            if self.teamPlayer[i][0] not in playerList:
+                row1 = ttk.Label(self.scrollable_frame1, width=120,
+                            background="#d9d9d9")
+                row1.pack(pady=3,ipady=10)
+                name = Label(row1, width=20, height=1, background="#d9d9d9",
+                            text=self.teamPlayer[i][1], font=('Yu Gothic', 14, 'bold'))
+                name.place(x=10, y=6)
+                type = Label(row1, width=11, height=1, background="#d9d9d9",
+                            text=self.teamPlayer[i][2], font=('Yu Gothic', 14, 'bold'))
+                type.place(x=320, y=6)
+                id = Label(row1, width=20, height=1, background="#d9d9d9", text=str(
+                    self.teamPlayer[i][0]), font=('Yu Gothic', 14, 'bold'))
+                id.place(x=445, y=6)
+                count += 1
+                print(self.teamPlayer[i][0])
+                playerList.append(self.teamPlayer[i][0])
+            print(playerList)
+
     def viewResults(self):
         self.r6 = Toplevel(self.master)
         self.app6 = ViewResult(self.r6, self.team_Id)
@@ -34,6 +60,9 @@ class TeamView:
         self.master.destroy()
 
     def __init__(self, master, teamId):
+        global count
+        global playerList
+        print(playerList)
         self.master = master
         self.width = self.master.winfo_screenwidth()
         self.height = self.master.winfo_screenheight()
@@ -108,9 +137,9 @@ class TeamView:
         self.teamMatches = getMatchesForTeam(int(self.team_Id))
 
         for i in range(len(self.teamMatches)):
-            row = Label(self.scrollable_frame, width=99,
-                        height=3, background="#d9d9d9")
-            row.pack(pady=3)
+            row = ttk.Label(self.scrollable_frame, width=199,
+                        background="#d9d9d9")
+            row.pack(pady=3,ipady=10)
             radio = Radiobutton(row, background="#d9d9d9")
             radio.place(x=15, y=10)
 
@@ -131,6 +160,7 @@ class TeamView:
             venue = Label(row, width=20, height=1, background="#d9d9d9", text=self.teamMatches[i][4],
                           font=('Yu Gothic', 14, 'bold'))
             venue.place(x=440, y=6)
+            count  += 1
 
         self.container.place(x=46, y=300)
         self.canvas2.pack(side="left", fill="both", expand=True)
@@ -192,9 +222,9 @@ class TeamView:
         self.teamPlayer = getTeamPlayers(self.team_Id)
 
         for i in range(len(self.teamPlayer)):
-            row1 = Label(self.scrollable_frame1, width=90,
-                         height=3, background="#d9d9d9")
-            row1.pack(pady=3)
+            row1 = ttk.Label(self.scrollable_frame1, width=120,
+                         background="#d9d9d9")
+            row1.pack(pady=3,ipady=10)
             name = Label(row1, width=20, height=1, background="#d9d9d9",
                          text=self.teamPlayer[i][1], font=('Yu Gothic', 14, 'bold'))
             name.place(x=10, y=6)
@@ -204,6 +234,9 @@ class TeamView:
             id = Label(row1, width=20, height=1, background="#d9d9d9", text=str(
                 self.teamPlayer[i][0]), font=('Yu Gothic', 14, 'bold'))
             id.place(x=445, y=6)
+            playerList.append(self.teamPlayer[i][0])
+
+        print(playerList)
 
         self.container1.place(x=824, y=300)
         self.canvas1.pack(side="left", fill="both", expand=True)
@@ -227,13 +260,16 @@ class TeamView:
                                   foreground="white", command=self.ptsTable, wraplength=100)
         self.ptsTableBtn.place(x=1405, y=720)
 
+        self.refBtn = Button(self.master, width=7, background='#f4a290', relief='flat', text='Refresh', font=('Yu Gothic', 17, 'bold'),
+                                  foreground="white", command=self.refresh)
+        self.refBtn.place(x=1320,y=183)
+
         self.label1 = LabelFrame(
             self.master, text="Enter Tournament Id", background="#f4a290", foreground="white")
         self.label1.place(x=1220, y=720, width=180, height=60)
         self.idEntry = Entry(self.label1, font=(
             'Yu Gothic', 14, 'bold'), textvariable=self.tournaId)
         self.idEntry.place(x=5, y=0, width=160, height=40)
-
         self.master.mainloop()
 
 # main5()
