@@ -78,7 +78,7 @@ class AdminWindow:
                              fieldbackground="#d3d3d3",
                              font=('Yu Gothic', 10, 'bold'))
         # style.layout("table.Treeview",[('tournament.Treeview.treearea', {'sticky': 'nswe'})]) #remove border
-        self.style.map('Treeview', background=[('selected', '#caf6ff')])
+        self.style.map('Treeview', background=[('selected', '#caf6ff')], foreground=[('selected', 'black')])
 
         self.tournaments = ttk.Treeview(
             self.master, style="tournament.Treeview")

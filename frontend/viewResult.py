@@ -43,7 +43,7 @@ class ViewResult:
                              fieldbackground="#d3d3d3",
                              font=('Yu Gothic', 15, 'bold'))
         # style.layout("result.Treeview",[('result.Treeview.treearea', {'sticky': 'nswe'})]) #remove border
-        self.style.map('Treeview', background=[('selected', '#f4a209')])
+        self.style.map('Treeview', background=[('selected', '#f4a290')])
 
         self.result = ttk.Treeview(self.master, style="result.Treeview")
 

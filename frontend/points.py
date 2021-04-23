@@ -45,7 +45,7 @@ class PointsTable:
                              fieldbackground="#d3d3d3",
                              font=('Yu Gothic', 15, 'bold'))
         # style.layout("table.Treeview",[('table.Treeview.treearea', {'sticky': 'nswe'})]) #remove border
-        self.style.map('Treeview', background=[('selected', '#caf6ff')])
+        self.style.map('Treeview', background=[('selected', '#caf6ff')], foreground=[('selected', 'black')])
 
         self.table = ttk.Treeview(self.master, style="table.Treeview")
 
