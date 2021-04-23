@@ -55,7 +55,7 @@ class TourView:
                              font=('Yu Gothic', 15, 'bold')
                              )
         # style.layout("matches.Treeview",[('table.Treeview.treearea', {'sticky': 'nswe'})]) #remove border
-        self.style.map('Treeview', background=[('selected', '#caf6ff')])
+        self.style.map('Treeview', background=[('selected', '#caf6ff')], foreground=[('selected', 'black')])
 
         self.matches = ttk.Treeview(self.master, style="matches.Treeview")
 

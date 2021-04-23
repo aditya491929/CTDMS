@@ -219,3 +219,12 @@ def resultAdded(match_id):
     if(result[0][0]==1):
         return True
     return False
+
+def deletePlayer(team_id,player_id):
+    print("TeamId:{} ; PlayerId:{}".format(team_id,player_id))
+    query = "DELETE FROM player WHERE p_id = {} AND team_id = {}".format(int(player_id), int(team_id))
+    result = Database.deleteRow(query)
+    if result:
+        print("Query Success!")
+        return True
+    return False

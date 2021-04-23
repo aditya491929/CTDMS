@@ -2,10 +2,11 @@ from viewResult import ViewResult
 from addPlayer import AddPlayer
 from points import PointsTable
 from tkinter import *
-from tkinter import ttk
+from tkinter import ttk,messagebox
 from initial import initialize
 initialize()
 from connect import *
+from connect import deletePlayer
 import sys
 
 count = 0
@@ -16,6 +17,65 @@ playerList = []
 #   app=TeamView(r)
 
 class TeamView:
+    def dltPlayer(self):
+        print(playerList)
+        teamid = self.team_Id
+        plyrid = self.player_id.get()
+        print("teamId: {} ; PlayerId: {}".format(self.team_Id,self.player_id.get()))
+        if int(plyrid) in playerList:
+            result = deletePlayer(int(teamid),int(plyrid))
+            if result:
+                playerList.remove(int(plyrid))
+                messagebox.showinfo(" Message", "Player Deleted Successfully!")
+                print("After Deletion:",playerList)
+                print("success")
+                self.container1 = ttk.Frame(self.master)
+                self.canvas1 = Canvas(self.container1, width=637, bg="white")
+                self.scrollbar1 = ttk.Scrollbar(
+                    self.container1, orient="vertical", command=self.canvas1.yview)
+                self.scrollable_frame1 = ttk.Frame(self.canvas1)
+
+                self.scrollable_frame1.bind(
+                    "<Configure>",
+                    lambda e1: self.canvas1.configure(
+                        scrollregion=self.canvas1.bbox("all"),
+                        height=333
+                    )
+                )
+
+                self.canvas1.create_window(
+                    (0, 0), window=self.scrollable_frame1, anchor="nw")
+
+                self.canvas1.configure(
+                    yscrollcommand=self.scrollbar1.set, background="grey")
+
+                self.teamPlayer = getTeamPlayers(self.team_Id)
+
+                for i in range(len(self.teamPlayer)):
+                    row1 = ttk.Label(self.scrollable_frame1, width=120,
+                                background="#d9d9d9")
+                    row1.pack(pady=3,ipady=10)
+                    name = Label(row1, width=20, height=1, background="#d9d9d9",
+                                text=self.teamPlayer[i][1], font=('Yu Gothic', 14, 'bold'))
+                    name.place(x=10, y=6)
+                    type = Label(row1, width=11, height=1, background="#d9d9d9",
+                                text=self.teamPlayer[i][2], font=('Yu Gothic', 14, 'bold'))
+                    type.place(x=320, y=6)
+                    id = Label(row1, width=20, height=1, background="#d9d9d9", text=str(
+                        self.teamPlayer[i][0]), font=('Yu Gothic', 14, 'bold'))
+                    id.place(x=445, y=6)
+
+            print(playerList)
+
+            self.container1.place(x=824, y=300)
+            self.canvas1.pack(side="left", fill="both", expand=True)
+            self.scrollbar1.pack(side="right", fill="y")
+
+        else:
+            messagebox.showerror("Alert","No Player With Given P_ID Found!")
+        self.player_id.set("")
+        
+
     def refresh(self):
         global count
         global playerList
@@ -74,6 +134,7 @@ class TeamView:
         self.teamViewPg.pack()
 
         self.tournaId = StringVar()
+        self.player_id = StringVar()
 
         self.team_Id = teamId
         self.teamname = {1: "MI", 2: "CSK", 3: "KKR",
@@ -262,14 +323,24 @@ class TeamView:
 
         self.refBtn = Button(self.master, width=7, background='#f4a290', relief='flat', text='Refresh', font=('Yu Gothic', 17, 'bold'),
                                   foreground="white", command=self.refresh)
-        self.refBtn.place(x=1320,y=183)
+        self.refBtn.place(x=1310,y=183)
 
-        self.label1 = LabelFrame(
-            self.master, text="Enter Tournament Id", background="#f4a290", foreground="white")
+        self.label1 = LabelFrame(self.master, text="Enter Tournament Id", background="#f4a290", foreground="white")
         self.label1.place(x=1220, y=720, width=180, height=60)
-        self.idEntry = Entry(self.label1, font=(
-            'Yu Gothic', 14, 'bold'), textvariable=self.tournaId)
+
+        self.idEntry = Entry(self.label1, font=('Yu Gothic', 14, 'bold'), textvariable=self.tournaId)
         self.idEntry.place(x=5, y=0, width=160, height=40)
+
+        self.label2 = LabelFrame(self.master, text="Enter Player Id", background="#f4a290", foreground="white")
+        self.label2.place(x=835, y=183, width=150, height=50)
+
+        self.idEntry1 = Entry(self.label2, font=('Yu Gothic', 14, 'bold'), textvariable=self.player_id)
+        self.idEntry1.place(x=5, y=0, width=140, height=30)
+
+        self.deletePlayer = Button(self.master, width=7, background='#f4a290', relief='flat', text='Delete Player', font=('Yu Gothic', 10, 'bold'),
+                                  foreground="white", command=self.dltPlayer, wraplength=80)
+        self.deletePlayer.place(x=990, y=183)
+
         self.master.mainloop()
 
 # main5()

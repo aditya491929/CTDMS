@@ -118,4 +118,18 @@ class Database:
             print(e)
         finally:
             Database.closeConnection()
+
+    @staticmethod
+    def deleteRow(query):
+        Database.openConnection()
+        cur = Database.getCursor()
+        try:
+            cur.execute(query)
+            Database.commitConnection()
+            print("Record Deleted")
+            return True
+        except (psycopg2.Error) as e:
+            print(e)
+        finally:
+            Database.closeConnection()
     
